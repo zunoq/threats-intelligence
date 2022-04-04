@@ -1,8 +1,11 @@
 <template>
   <q-layout view="hHh lpR fFf">
-    <q-header class="bg-primary text-white">
+    <q-header class="bg-aaa text-white">
       <q-toolbar>
-        <q-toolbar-title> Threat Intelligence </q-toolbar-title>
+        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
+        <q-toolbar-title class="large-screen-only">
+          Threat Intelligence
+        </q-toolbar-title>
         <q-space />
 
         <q-input
@@ -26,11 +29,13 @@
           </template>
         </q-input>
         <q-btn flat round color="primary" icon="manage_search" />
-        <q-separator dark vertical inset spaced />
-        <q-btn flat round color="primary" icon="dashboard_customize" />
-        <q-btn flat round color="primary" icon="explore" />
-        <q-btn flat round color="primary" icon="upload" />
-        <q-btn flat round color="primary" icon="account_circle" />
+        <div class="large-screen-only-navbar">
+          <q-separator dark vertical inset spaced />
+          <q-btn flat round color="primary" icon="dashboard_customize" />
+          <q-btn flat round color="primary" icon="explore" />
+          <q-btn flat round color="primary" icon="upload" />
+          <q-btn flat round color="primary" icon="account_circle" />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -38,7 +43,7 @@
       v-model="drawer"
       show-if-above
       :width="220"
-      :breakpoint="500"
+      :breakpoint="764"
       class="medium-font bg-primary text-white"
       active-color="white"
     >
@@ -175,6 +180,7 @@ export default {
   setup() {
     return {
       text: ref(""),
+      drawer: ref(false),
     };
   },
 };
@@ -183,7 +189,7 @@ export default {
 <style lang="scss">
 .q-header {
   height: 64px;
-  border-bottom: 1px solid #253647;
+  border-bottom: 1px solid $separate-line;
   .q-toolbar {
     height: 64px;
     .q-icon {
@@ -195,17 +201,17 @@ export default {
   }
 }
 .q-drawer {
-  border-right: 1px solid #253647;
+  border-right: 1px solid $separate-line;
   .q-item__section--side {
     color: #fff;
   }
   .q-item__section--icon {
   }
   .active-page {
-    background-color: #063250;
+    background-color: $active;
   }
   .q-separator--horizontal {
-    background-color: #253647;
+    background-color: $separate-line;
   }
 }
 </style>
