@@ -12,8 +12,9 @@ const routes = [
       { path: '/threats', component: () => import('pages/ThreatsPage.vue') },
       { path: '/arsenal', component: () => import('pages/ArsenalPage.vue') },
       { path: '/entities', component: () => import('pages/EntitiesPage.vue') },
-      { path: '/data', component: () => import('pages/DataPage.vue') },
+      { path: '/backgroundtasks', component: () => import('src/pages/BackgroundTasksPage.vue') },
       { path: '/settings', component: () => import('pages/SettingsPage.vue') },
+      { path: '/connectors', component: () => import('pages/ConnectorsPage.vue') },
     ]
   },
 

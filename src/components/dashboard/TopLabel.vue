@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-12 col-lg-4">
-    <div class="text-subtitle1 text-accent q-py-xs text-uppercase">
+    <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
       Top Label (last 3 months)
     </div>
     <q-card class="label-card">
@@ -30,10 +30,10 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "TopLabel",
-  props: ["labels"],
+  props: ["topLabels"],
   data() {
     return {
-      labelsData: this.labels,
+      labelsData: this.topLabels,
       colorList: [
         {
           text: "#e21483",
@@ -94,7 +94,6 @@ export default defineComponent({
   },
   mounted() {
     this.nFormatter();
-    console.log(this.labelsData);
   },
 });
 </script>

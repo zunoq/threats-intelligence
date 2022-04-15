@@ -55,3 +55,27 @@
     display: inline-flex;
   }
 }
+.large-screen-only-filter {
+  @media (max-width: $breakpoint-xs-max) {
+    display: none;
+  }
+  @media (min-width: $breakpoint-lg-min) {
+    display: inline-flex;
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+// $aaa: #28a519;
+:root {
+  .text-gradient {
+    color: $gradient !important;
+  }
+  .bg-gradient {
+    background: $gradient !important;
+  }
+}
+
+:export {
+  defaultBackground: #FFCC00;
+}

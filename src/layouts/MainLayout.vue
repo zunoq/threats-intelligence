@@ -1,6 +1,6 @@
 <template>
-  <q-layout view="hHh lpR fFf">
-    <q-header class="bg-aaa text-white">
+  <q-layout view="hHh LpR fFf">
+    <q-header class="bg-primary text-white" elevated>
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
         <q-toolbar-title class="large-screen-only">
@@ -28,13 +28,21 @@
             />
           </template>
         </q-input>
-        <q-btn flat round color="primary" icon="manage_search" />
+        <q-btn flat round color="primary" icon="manage_search">
+          <q-tooltip> Advanced Search</q-tooltip>
+        </q-btn>
         <div class="large-screen-only-navbar">
           <q-separator dark vertical inset spaced />
-          <q-btn flat round color="primary" icon="dashboard_customize" />
-          <q-btn flat round color="primary" icon="explore" />
-          <q-btn flat round color="primary" icon="upload" />
-          <q-btn flat round color="primary" icon="account_circle" />
+          <q-btn flat round color="primary" icon="dashboard_customize">
+            <q-tooltip> Customize Dashboard </q-tooltip>
+          </q-btn>
+          <q-btn flat round color="primary" icon="explore">
+            <q-tooltip> Investigation </q-tooltip></q-btn
+          >
+          <q-btn flat round color="primary" icon="upload">
+            <q-tooltip> Data Import </q-tooltip></q-btn
+          >
+          <q-btn flat round color="primary" icon="account_circle"> </q-btn>
         </div>
       </q-toolbar>
     </q-header>
@@ -64,6 +72,7 @@
               class="q-pl-xl"
               to="/analysis"
               active-class=" active-page"
+              dense
             >
               <q-item-section avatar>
                 <q-icon name="assignment" />
@@ -78,6 +87,7 @@
               expand-separator
               class="q-pl-xl"
               to="/event"
+              dense
             >
               <q-item-section avatar>
                 <q-icon name="event" />
@@ -91,6 +101,7 @@
               expand-separator
               class="q-pl-xl"
               to="/observations"
+              dense
             >
               <q-item-section avatar>
                 <q-icon name="remove_red_eye" />
@@ -111,6 +122,7 @@
               expand-separator
               class="q-pl-xl"
               to="/threats"
+              dense
             >
               <q-item-section avatar>
                 <q-icon name="science" />
@@ -125,6 +137,7 @@
               expand-separator
               class="q-pl-xl"
               to="/arsenal"
+              dense
             >
               <q-item-section avatar>
                 <q-icon name="leaderboard" />
@@ -132,37 +145,62 @@
 
               <q-item-section> Arsenal </q-item-section>
             </q-item>
+          </q-expansion-item>
+        </q-list>
+        <q-separator dark dense />
+        <q-list>
+          <q-expansion-item expand-separator icon="storage" label="Data">
+            <q-item
+              clickable
+              v-ripple
+              expand-separator
+              class="q-pl-xl"
+              to="/entities"
+              active-class=" active-page"
+              dense
+            >
+              <q-item-section avatar>
+                <q-icon name="bug_report" />
+              </q-item-section>
+
+              <q-item-section> Entities </q-item-section>
+            </q-item>
             <q-item
               clickable
               active-class="active-page"
               v-ripple
               expand-separator
               class="q-pl-xl"
-              to="/entities"
+              to="/backgroundtasks"
+              dense
             >
               <q-item-section avatar>
-                <q-icon name="extension" />
+                <q-icon name="splitscreen" />
               </q-item-section>
 
-              <q-item-section> Entities </q-item-section>
+              <q-item-section> Background Tasks </q-item-section> </q-item
+            ><q-item
+              clickable
+              active-class="active-page"
+              v-ripple
+              expand-separator
+              class="q-pl-xl"
+              to="/connectors"
+              dense
+            >
+              <q-item-section avatar>
+                <q-icon name="sensors" />
+              </q-item-section>
+
+              <q-item-section> Connectors </q-item-section>
             </q-item>
           </q-expansion-item>
-        </q-list>
-        <q-separator dark dense />
-        <q-list>
-          <q-item clickable active-class="active-page" v-ripple to="/data">
-            <q-item-section avatar>
-              <q-icon name="storage" />
-            </q-item-section>
-
-            <q-item-section> Data </q-item-section>
-          </q-item>
           <q-item clickable active-class="active-page" v-ripple to="/settings">
             <q-item-section avatar>
               <q-icon name="settings" />
             </q-item-section>
 
-            <q-item-section> Setting </q-item-section>
+            <q-item-section> Settings </q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
@@ -189,11 +227,11 @@ export default {
 <style lang="scss">
 .q-header {
   height: 64px;
-  border-bottom: 1px solid $separate-line;
+  border-bottom: 1px solid #07111b;
   .q-toolbar {
     height: 64px;
     .q-icon {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.8);
     }
     .q-btn {
       margin: 2px;
@@ -212,6 +250,12 @@ export default {
   }
   .q-separator--horizontal {
     background-color: $separate-line;
+  }
+  .q-item__section--side {
+    color: $secondary;
+  }
+  .q-expansion-item__toggle-icon {
+    color: rgba(255, 255, 255, 0.8);
   }
 }
 </style>

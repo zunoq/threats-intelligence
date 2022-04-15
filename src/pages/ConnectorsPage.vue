@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <h3 class="text-white">Data</h3>
+    <h3 class="text-white">ConnectorsPage</h3>
   </q-page>
 </template>
 
@@ -8,6 +8,6 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "DataPage",
+  name: "ConnectorsPage",
 });
 </script>
