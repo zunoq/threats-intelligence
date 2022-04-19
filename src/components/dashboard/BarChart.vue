@@ -4,11 +4,7 @@
       TOP 10 ACTIVE ENTITIES (3 LAST MONTHS)
     </div>
     <q-card dark flat class="bg-primary light-font">
-      <BarChart
-        :chart-data="data"
-        :options="options"
-        style="max-height: 400px"
-      />
+      <BarChart :chart-data="data" :options="options" />
     </q-card>
   </div>
 </template>

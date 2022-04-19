@@ -74,8 +74,10 @@
   .bg-gradient {
     background: $gradient !important;
   }
-}
-
-:export {
-  defaultBackground: #FFCC00;
+  .text-active {
+    color: $active !important;
+  }
+  .bg-active {
+    background: $active !important;
+  }
 }

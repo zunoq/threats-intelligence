@@ -9,7 +9,9 @@
       selection="multiple"
       v-model:selected="selected"
       hide-bottom
-    />
+      @click="alert"
+    >
+    </q-table>
   </div>
 </template>
 
@@ -18,9 +20,9 @@ import { ref } from "vue";
 
 const columns = [
   {
-    name: "desc",
+    name: "type",
     required: true,
-    label: "Dessert (100g serving)",
+    label: "Type",
     align: "left",
     field: (row) => row.name,
     format: (val) => `${val}`,
@@ -164,6 +166,11 @@ export default {
         rowsPerPage: 0, // 0 means all rows
       },
     };
+  },
+  methods: {
+    alert() {
+      this.alert("AaB");
+    },
   },
   setup() {
     const selected = ref([]);

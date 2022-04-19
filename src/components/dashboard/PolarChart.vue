@@ -72,7 +72,6 @@ const options = ref({
         color: "#253647",
       },
       ticks: {
-        color: "rgba(255, 255, 255, 0.8)",
         showLabelBackdrop: false,
       },
     },

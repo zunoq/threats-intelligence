@@ -3,7 +3,7 @@
     <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
       Top Label (last 3 months)
     </div>
-    <q-card class="label-card">
+    <q-card class="label-card" flat>
       <div class="row">
         <div
           class="label-item col-4 q-pa-md"

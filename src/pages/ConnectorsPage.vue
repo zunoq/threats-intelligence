@@ -1,13 +1,16 @@
 <template>
-  <q-page class="flex flex-center">
-    <h3 class="text-white">ConnectorsPage</h3>
+  <q-page class="container q-pa-md">
+    <div class="row q-col-gutter-md">
+      <StatisticsBar />
+    </div>
   </q-page>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-
+import StatisticsBar from "../components/connectors/StatisticsBar.vue";
 export default defineComponent({
   name: "ConnectorsPage",
+  components: { StatisticsBar },
 });
 </script>
