@@ -4,9 +4,9 @@
       show-if-above
       v-model="rightDrawerOpen"
       side="right"
-      bordered
       class="bg-primary"
       width="250"
+      :breakpoint="1400"
     >
       <q-scroll-area class="fit">
         <div class="">
@@ -104,7 +104,7 @@ export default defineComponent({
 }
 .q-layout {
   .q-drawer {
-    border-left: 1px solid $separate-line;
+    border-left: 1px solid;
   }
 }
 </style>

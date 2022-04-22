@@ -1,31 +1,31 @@
 // app global css in SCSS form
 @font-face {
-  font-family: "Montserrat";
-  src: url(../assets/fonts/Montserrat/static/Montserrat-Regular.ttf);
+  font-family: "IBM_Plex_Sans";
+  src: url(../assets/fonts/IBM_Plex_Sans/IBMPlexSans-Regular.ttf);
 }
 @font-face {
-  font-family: "Montserrat Bold";
-  src: url(../assets/fonts/Montserrat/static/Montserrat-Bold.ttf);
+  font-family: "IBM_Plex_Sans Bold";
+  src: url(../assets/fonts/IBM_Plex_Sans/IBMPlexSans-Bold.ttf);
 }
 @font-face {
-  font-family: "Montserrat Medium";
-  src: url(../assets/fonts/Montserrat/static/Montserrat-Medium.ttf);
+  font-family: "IBM_Plex_Sans Medium";
+  src: url(../assets/fonts/IBM_Plex_Sans/IBMPlexSans-Medium.ttf);
 }
 @font-face {
-  font-family: "Montserrat Light";
-  src: url(../assets/fonts/Montserrat/static/Montserrat-Light.ttf);
+  font-family: "IBM_Plex_Sans Light";
+  src: url(../assets/fonts/IBM_Plex_Sans/IBMPlexSans-Light.ttf);
 }
 .regular-font {
-  font-family: "Montserrat";
+  font-family: "IBM_Plex_Sans";
 }
 .bold-font {
-  font-family: "Montserrat Bold";
+  font-family: "IBM_Plex_Sans Bold";
 }
 .medium-font {
-  font-family: "Montserrat Medium";
+  font-family: "IBM_Plex_Sans Medium";
 }
 .light-font {
-  font-family: "Montserrat Light";
+  font-family: "IBM_Plex_Sans Light";
 }
 
 // Responsive
@@ -56,28 +56,153 @@
   }
 }
 .large-screen-only-filter {
-  @media (max-width: $breakpoint-xs-max) {
+  @media (max-width: $breakpoint-lg-max) {
     display: none;
   }
-  @media (min-width: $breakpoint-lg-min) {
+  @media (min-width: $breakpoint-xl-min) {
     display: inline-flex;
   }
 }
 ::-webkit-scrollbar {
   display: none;
 }
-// $aaa: #28a519;
 :root {
+  .text-tertiary {
+    color: $tertiary !important;
+  }
+  .bg-tertiary {
+    background: $tertiary !important;
+  }
+  .text-quaternary {
+    color: $quaternary !important;
+  }
+  .bg-quaternary {
+    background: $quaternary !important;
+  }
   .text-gradient {
     color: $gradient !important;
   }
   .bg-gradient {
     background: $gradient !important;
   }
+  //
   .text-active {
     color: $active !important;
   }
   .bg-active {
     background: $active !important;
+  }
+  // LABEL
+  .text-blog-post {
+    color: $blog-post !important;
+  }
+  .bg-blog-post {
+    background: $blog-post !important;
+  }
+  //
+  .text-malware {
+    color: $malware !important;
+  }
+  .bg-malware {
+    background: $malware !important;
+  }
+  //
+  .text-ransomeware {
+    color: $ransomeware !important;
+  }
+  .bg-ransomeware {
+    background: $ransomeware !important;
+  }
+  //
+  .text-osint {
+    color: $osint !important;
+  }
+  .bg-osint {
+    background: $osint !important;
+  }
+
+  //
+  .text-elf {
+    color: $elf !important;
+  }
+  .bg-elf {
+    background: $elf !important;
+  }
+
+  //
+  .text-firewall {
+    color: $firewall !important;
+  }
+  .bg-firewall {
+    background: $firewall !important;
+  }
+
+  //
+  .text-symantec {
+    color: $symantec !important;
+  }
+  .bg-symantec {
+    background: $symantec !important;
+  }
+
+  //
+  .text-spyware {
+    color: $spyware !important;
+  }
+  .bg-spyware {
+    background: $spyware !important;
+  }
+
+  //
+  .text-one-past {
+    color: $one-past !important;
+  }
+  .bg-one-past {
+    background: $one-past !important;
+  }
+
+  //
+  .text-bica {
+    color: $bica !important;
+  }
+  .bg-bica {
+    background: $bica !important;
+  }
+
+  //
+  .text-gootloader {
+    color: $gootloader !important;
+  }
+  .bg-gootloader {
+    background: $gootloader !important;
+  }
+
+  //
+  .text-goodkit {
+    color: $goodkit !important;
+  }
+  .bg-goodkit {
+    background: $goodkit !important;
+  }
+  //
+  .text-avast {
+    color: $avast !important;
+  }
+  .bg-avast {
+    background: $avast !important;
+  }
+  //
+  .text-backdoor {
+    color: $backdoor !important;
+  }
+  .bg-backdoor {
+    background: $backdoor !important;
+  }
+  //
+  .text-zloader {
+    color: $zloader !important;
+  }
+  .bg-zloader {
+    background: $zloader !important;
   }
 }

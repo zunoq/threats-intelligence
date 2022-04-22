@@ -1,6 +1,6 @@
 <template>
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-    <q-card dark flat class="bg-primary light-font">
+    <q-card dark flat bordered class="bg-primary light-font">
       <q-card-section>
         <div class="row">
           <div class="col-10">
@@ -57,9 +57,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .q-card {
-  border: 1px solid $card-border;
   border-radius: 5px;
   box-sizing: border-box;
   .row {

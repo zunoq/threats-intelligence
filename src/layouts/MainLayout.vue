@@ -50,7 +50,7 @@
     <q-drawer
       v-model="drawer"
       show-if-above
-      :width="220"
+      :width="200"
       :breakpoint="764"
       class="medium-font bg-primary text-white"
       active-color="white"
@@ -225,6 +225,9 @@ export default {
 </script>
 
 <style lang="scss">
+.my-tooltip-content {
+  font-size: 50px;
+}
 .q-header {
   height: 64px;
   border-bottom: 1px solid #07111b;
@@ -239,17 +242,19 @@ export default {
   }
 }
 .q-drawer {
-  border-right: 1px solid $separate-line;
+  border-right: 1px solid;
   .q-item__section--side {
     color: #fff;
-  }
-  .q-item__section--icon {
   }
   .active-page {
     background-color: $active;
   }
+  .q-item__section--icon {
+  }
+  .q-item__section--avatar {
+    min-width: 30px;
+  }
   .q-separator--horizontal {
-    background-color: $separate-line;
   }
   .q-item__section--side {
     color: $secondary;

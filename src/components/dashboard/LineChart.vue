@@ -3,7 +3,7 @@
     <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
       INGESTED ENTITIES
     </div>
-    <q-card dark flat class="bg-primary light-font">
+    <q-card dark flat bordered class="bg-primary light-font">
       <LineChart
         :chart-data="data"
         :options="options"

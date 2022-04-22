@@ -12,18 +12,38 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary: rgb(0, 30, 60);
+$primary: #001e3c;
 $secondary: #00b1ff;
-$accent: rgb(237, 64, 122);
+$tertiary: #01478d;
+$quaternary: #1f3954;
+$accent: #ed407a;
 
 $dark: #0a1929;
 
-$positive: rgb(76, 175, 80);
-$negative: rgb(193, 0, 21);
-$info: rgb(49, 204, 236);
-$warning: rgb(217, 134, 9);
+$positive: #4caf50;
+$negative: #c10015;
+$info: #31ccec;
+$warning: #d98609;
 
 $active: #063250;
-$separate-line: #253647;
-$card-border: #1f3954;
+$separator-dark-color: #253647;
 $gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) rgba(0, 30, 60, 0.8));
+//Global Config
+$tooltip-background: black;
+
+// Labels color
+$blog-post: #ebff76;
+$malware: #f38428;
+$ransomeware: #8fd671;
+$osint: #e21483;
+$elf: #9f8801;
+$firewall: #007d75;
+$symantec: #5e0e84;
+$spyware: #39126c;
+$one-past: #8bb5e0;
+$bica: #a6262e;
+$gootloader: #2023c3;
+$goodkit: #e94e5e;
+$avast: #290d83;
+$backdoor: #144960;
+$zloader: #0c578f;

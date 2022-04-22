@@ -3,7 +3,7 @@
     <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
       OBSERVABLES DISTRIBUTION
     </div>
-    <q-card flat class="bg-primary light-font">
+    <q-card dark flat bordered class="bg-primary light-font">
       <PolarAreaChart :chart-data="data" :options="options" />
     </q-card>
   </div>
@@ -34,18 +34,26 @@ const options = ref({
   elements: {
     arc: {
       borderColor: [
-        "rgba(255, 99, 132,1)",
-        "rgba(75, 192, 192,1)",
-        "rgba(255, 205, 86,1)",
-        "rgba(201, 203, 207,1)",
-        "rgba(54, 162, 235,1)",
+        "#f38428ff",
+        "#2023c3ff",
+        "#8fd671ff",
+        "#e21483ff",
+        "#9f8801ff",
+        "#007d75ff",
+        "#39126cff",
+        "#8bb5e0ff",
+        "#a6262eff",
       ],
       backgroundColor: [
-        "rgba(255, 99, 132,0.3)",
-        "rgba(75, 192, 192,0.3)",
-        "rgba(255, 205, 86,0.3)",
-        "rgba(201, 203, 207,0.3)",
-        "rgba(54, 162, 235,0.3)",
+        "#f3842830",
+        "#2023c330",
+        "#8fd67130",
+        "#e2148330",
+        "#9f880130",
+        "#007d7530",
+        "#39126c30",
+        "#8bb5e030",
+        "#a6262e30",
       ],
     },
   },

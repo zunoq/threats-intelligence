@@ -3,7 +3,7 @@
     <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
       LAST INGESTED ANALYSIS (CREATION DATE IN THE PLATFORM)
     </div>
-    <q-card dark flat>
+    <q-card dark flat bordered>
       <div class="">
         <q-table
           :rows="rows"
@@ -13,7 +13,7 @@
           hide-header
           hide-bottom
         >
-          <template v-slot:body="props">
+          <template #body="props">
             <q-tr :props="props">
               <q-td key="icon" :props="props" dense>
                 <q-icon :name="props.row.icon" size="24px" color="secondary" />
@@ -74,4 +74,4 @@ export default defineComponent({
 });
 </script>
 
-<style lang=""></style>
+<style lang="scss"></style>

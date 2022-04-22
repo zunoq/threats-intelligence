@@ -2,163 +2,199 @@
   <div class="">
     <q-table
       dark
+      flat
       :rows="rows"
       :columns="columns"
-      row-key="name"
       v-model:pagination="pagination"
-      selection="multiple"
       v-model:selected="selected"
+      selection="multiple"
+      row-key="name"
       hide-bottom
-      @click="alert"
+      :table-header-style="{ textTransform: 'uppercase'}"
     >
+      <template #body="props">
+        <q-tr :props="props" @click="onRowClick(props.row)">
+          <q-td key="checkbox" auto-width>
+            <q-checkbox
+              v-model="props.selected"
+              :option="(value = props.name)"
+              dark
+            />
+          </q-td>
+          <q-td label="">
+            <q-icon :name="props.row.type.icon" size="md" color="secondary" />
+          </q-td>
+          <q-td key="name" :props="props" class="text-capitalize">
+            {{ props.row.type.name }}
+          </q-td>
+          <q-td key="name" :props="props" class="text-capitalize">
+            {{ props.row.name }}
+          </q-td>
+          <q-td key="author" :props="props" class="text-capitalize">
+            {{ props.row.author }}
+          </q-td>
+          <q-td key="labels" :props="props" auto-width>
+            <div v-if="props.row.labels.length != 0">
+              <span
+                class="q-mx-xs"
+                v-for="(label, idx) in props.row.labels"
+                :key="idx"
+              >
+                <q-badge :color="label" outline rounded> {{ label }}</q-badge>
+              </span>
+            </div>
+            <div v-else>
+              <span class="q-mx-xs">
+                <q-badge color="white" outline rounded> no label</q-badge>
+              </span>
+            </div>
+          </q-td>
+          <q-td key="credate" :props="props">
+            {{ dateconvert(props.row.credate) }}
+          </q-td>
+          <q-td key="marking" :props="props">
+            <q-chip
+              dark
+              square
+              :color="`${handleMarking(props.row.marking)}`"
+              class="marking text-uppercase text-center"
+              :class="props.row.marking == 'tlp:white' ? 'text-black' : ' '"
+            >
+              {{ props.row.marking }}
+            </q-chip>
+          </q-td>
+        </q-tr>
+      </template>
     </q-table>
   </div>
 </template>
 
 <script>
-import { ref } from "vue";
-
+import { ref, defineComponent } from "vue";
+import { date } from "quasar";
 const columns = [
+  {
+    name: "icon",
+    label: "",
+    align: "center",
+  },
   {
     name: "type",
     required: true,
     label: "Type",
     align: "left",
+    field: (row) => row.type,
+    sortable: true,
+  },
+  {
+    name: "name",
+    required: true,
+    align: "left",
+    label: "Name",
     field: (row) => row.name,
-    format: (val) => `${val}`,
     sortable: true,
   },
   {
-    name: "calories",
-    align: "center",
-    label: "Calories",
-    field: "calories",
+    name: "author",
+    required: true,
+    align: "left",
+    label: "Author",
+    field: (row) => row.author,
     sortable: true,
   },
-  { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
-  { name: "carbs", label: "Carbs (g)", field: "carbs" },
-  { name: "protein", label: "Protein (g)", field: "protein" },
-  { name: "sodium", label: "Sodium (mg)", field: "sodium" },
   {
-    name: "calcium",
-    label: "Calcium (%)",
-    field: "calcium",
-    sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+    name: "labels",
+    required: true,
+    label: "Labels",
+    align: "left",
+    field: (row) => row.labels,
   },
   {
-    name: "iron",
-    label: "Iron (%)",
-    field: "iron",
-    sortable: true,
-    sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
+    name: "credate",
+    required: true,
+    label: "Creation Date",
+    align: "left",
+    field: (row) => row.credate,
+  },
+  {
+    name: "marking",
+    required: true,
+    label: "Marking",
+    align: "left",
+    field: (row) => row.marking,
   },
 ];
 
 const rows = [
   {
-    name: "Frozen Yogurt",
-    calories: 159,
-    fat: 6.0,
-    carbs: 24,
-    protein: 4.0,
-    sodium: 87,
-    calcium: "14%",
-    iron: "1%",
+    id: 1,
+    type: { name: "report", icon: "report" },
+    name: "Alert(TA14-353A1)",
+    marking: "tlp:red",
+    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
+    otherIDs: [
+      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
+      "report--e5a3759f-0a92-4315-988d-70e42952a488",
+    ],
+    author: "RISKIQ",
+    revoked: "no",
+    labels: [],
+    platformcredate: 1650340161065,
+    credate: 1650340193318,
+    moddate: 1650340224516,
+    creator: "RISKIQ",
+    processStatus: "disabled",
+    description:
+      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
+    reportTypes: "threat-report",
   },
   {
-    name: "Ice cream sandwich",
-    calories: 237,
-    fat: 9.0,
-    carbs: 37,
-    protein: 4.3,
-    sodium: 129,
-    calcium: "8%",
-    iron: "1%",
+    id: 2,
+    type: { name: "report", icon: "report" },
+    name: "Alert(TA14-353A2)",
+    marking: "tlp:blue",
+    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
+    otherIDs: [
+      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
+      "report--e5a3759f-0a92-4315-988d-70e42952a488",
+    ],
+    author: "RISKIQ",
+    revoked: "no",
+    labels: ["elf", "zloader"],
+    platformcredate: 1650340161065,
+    credate: 1650340193318,
+    moddate: 1650340224516,
+    creator: "RISKIQ",
+    processStatus: "disabled",
+    description:
+      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
+    reportTypes: "threat-report",
   },
   {
-    name: "Eclair",
-    calories: 262,
-    fat: 16.0,
-    carbs: 23,
-    protein: 6.0,
-    sodium: 337,
-    calcium: "6%",
-    iron: "7%",
-  },
-  {
-    name: "Cupcake",
-    calories: 305,
-    fat: 3.7,
-    carbs: 67,
-    protein: 4.3,
-    sodium: 413,
-    calcium: "3%",
-    iron: "8%",
-  },
-  {
-    name: "Gingerbread",
-    calories: 356,
-    fat: 16.0,
-    carbs: 49,
-    protein: 3.9,
-    sodium: 327,
-    calcium: "7%",
-    iron: "16%",
-  },
-  {
-    name: "Jelly bean",
-    calories: 375,
-    fat: 0.0,
-    carbs: 94,
-    protein: 0.0,
-    sodium: 50,
-    calcium: "0%",
-    iron: "0%",
-  },
-  {
-    name: "Lollipop",
-    calories: 392,
-    fat: 0.2,
-    carbs: 98,
-    protein: 0,
-    sodium: 38,
-    calcium: "0%",
-    iron: "2%",
-  },
-  {
-    name: "Honeycomb",
-    calories: 408,
-    fat: 3.2,
-    carbs: 87,
-    protein: 6.5,
-    sodium: 562,
-    calcium: "0%",
-    iron: "45%",
-  },
-  {
-    name: "Donut",
-    calories: 452,
-    fat: 25.0,
-    carbs: 51,
-    protein: 4.9,
-    sodium: 326,
-    calcium: "2%",
-    iron: "22%",
-  },
-  {
-    name: "KitKat",
-    calories: 518,
-    fat: 26.0,
-    carbs: 65,
-    protein: 7,
-    sodium: 54,
-    calcium: "12%",
-    iron: "6%",
+    id: 3,
+    type: { name: "report", icon: "report" },
+    name: "Alert(TA14-353A3)",
+    marking: "tlp:white",
+    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
+    otherIDs: [
+      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
+      "report--e5a3759f-0a92-4315-988d-70e42952a488",
+    ],
+    author: "RISKIQ",
+    revoked: "no",
+    labels: ["avast", "zloader", "ransomeware", "backdoor"],
+    platformcredate: 1650340161065,
+    credate: 1650340193318,
+    moddate: 1650340224516,
+    creator: "RISKIQ",
+    processStatus: "disabled",
+    description:
+      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
+    reportTypes: "threat-report",
   },
 ];
 
-export default {
+export default defineComponent({
   data() {
     return {
       pagination: {
@@ -167,19 +203,49 @@ export default {
       },
     };
   },
-  methods: {
-    alert() {
-      this.alert("AaB");
-    },
-  },
   setup() {
     const selected = ref([]);
-
     return {
       selected,
       columns,
       rows,
     };
   },
-};
+  methods: {
+    onRowClick(row) {
+      console.log("clicked on", row);
+      this.$q.localStorage.set("report", row);
+      this.$router.push("/entities/reports/" + row.id);
+    },
+  },
+  computed: {
+    dateconvert() {
+      return (timeStamp) => {
+        return date.formatDate(timeStamp, "MMM DD, YYYY");
+      };
+    },
+    handleMarking() {
+      return (val) => {
+        return val.slice(4, val.length);
+      };
+    },
+  },
+  updated() {
+    console.log(this.selected.length);
+  },
+});
 </script>
+<style lang="scss" scoped>
+.marking {
+  padding: 5px 10px;
+}
+.q-chip {
+  border-radius: 0px;
+  font-size: 12px;
+  height: 20px;
+  width: 90px;
+  .q-chip__content {
+    display: block;
+  }
+}
+</style>

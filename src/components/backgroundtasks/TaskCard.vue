@@ -1,5 +1,5 @@
 <template>
-  <q-card class="" flat dark>
+  <q-card class="" flat dark bordered>
     <div class="row bg-primary q-pa-md">
       <div class="col-5">
         <div class="label row-12 q-py-xs text-secondary">Targeted entities</div>

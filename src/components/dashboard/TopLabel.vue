@@ -3,21 +3,18 @@
     <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
       Top Label (last 3 months)
     </div>
-    <q-card class="label-card" flat>
+    <q-card class="label-card" flat dark bordered>
       <div class="row">
         <div
           class="label-item col-4 q-pa-md"
           v-for="(label, idx) in labelsData"
           :key="idx"
-          :style="'background-color:' + `${colorList[idx].bgColor}`"
+          :class="'bg-' + `${label.name}`"
         >
-          <div
-            class="label-number text-bold"
-            :style="'color:' + `${colorList[idx].text}`"
-          >
+          <div class="label-number text-bold">
             {{ label.number }}
           </div>
-          <div class="label-name" :style="'color:' + `${colorList[idx].text}`">
+          <div class="label-name text-light">
             {{ label.name }}
           </div>
         </div>
@@ -36,10 +33,12 @@ export default defineComponent({
       labelsData: this.topLabels,
       colorList: [
         {
+          name: "avast",
           text: "#e21483",
           bgColor: "#441b52",
         },
         {
+          name: "zloader",
           text: "#f38428",
           bgColor: "#493d36",
         },
@@ -91,6 +90,17 @@ export default defineComponent({
         }
       });
     },
+    hexToRGB(hex, alpha) {
+      var r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+
+      if (alpha) {
+        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+      } else {
+        return "rgb(" + r + ", " + g + ", " + b + ")";
+      }
+    },
   },
   mounted() {
     this.nFormatter();
@@ -102,6 +112,7 @@ export default defineComponent({
 .label-card {
   // border: none;
   .label-item {
+    position: relative;
     // border: none;
     .label-number {
       letter-spacing: 3px;

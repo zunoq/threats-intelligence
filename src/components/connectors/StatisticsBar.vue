@@ -1,6 +1,6 @@
 <template>
   <div class="col">
-    <q-card class="my-card q-pa-lg bg-primary" dark flat>
+    <q-card class="my-card q-pa-lg bg-primary" dark flat bordered>
       <div class="row q-pb-xs">
         <div class="title text-subtitle1">
           <q-icon name="multiline_chart" color="secondary" size="sm" />

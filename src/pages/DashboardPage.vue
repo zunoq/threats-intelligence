@@ -28,7 +28,7 @@ import TopLabel from "../components/dashboard/TopLabel.vue";
 import LineChart from "../components/dashboard/LineChart.vue";
 import BarChart from "../components/dashboard/BarChart.vue";
 import ReportTable from "../components/dashboard/ReportTable.vue";
-import PolarChart from "../components/dashboard/PolarChart.vue";
+import PolarChart from "../components/chart/PolarChart.vue";
 export default defineComponent({
   name: "DashboardPage",
   components: {
@@ -69,39 +69,39 @@ export default defineComponent({
       ],
       topLabelsData: [
         {
-          name: "Threat",
+          name: "malware",
           number: 26170,
         },
         {
-          name: "Osin",
+          name: "blog-post",
           number: 175903,
         },
         {
-          name: "Observe",
+          name: "bica",
           number: 17700,
         },
         {
-          name: "Arsenal",
+          name: "elf",
           number: 4570000,
         },
         {
-          name: "Malware",
+          name: "ransomeware",
           number: 26170,
         },
         {
-          name: "Elf",
+          name: "osint",
           number: 26170,
         },
         {
-          name: "Mozi",
+          name: "firewall",
           number: 7850000,
         },
         {
-          name: "Mirai",
+          name: "spyware",
           number: 54530,
         },
         {
-          name: "qbot",
+          name: "goodkit",
           number: 44130,
         },
       ],

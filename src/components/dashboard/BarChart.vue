@@ -3,7 +3,7 @@
     <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
       TOP 10 ACTIVE ENTITIES (3 LAST MONTHS)
     </div>
-    <q-card dark flat class="bg-primary light-font">
+    <q-card dark flat bordered class="bg-primary light-font">
       <BarChart :chart-data="data" :options="options" />
     </q-card>
   </div>
