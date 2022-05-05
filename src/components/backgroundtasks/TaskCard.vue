@@ -171,7 +171,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .q-card {
   .label {
     font-size: 13px;

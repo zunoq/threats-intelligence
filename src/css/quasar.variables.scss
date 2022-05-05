@@ -11,6 +11,8 @@
 // It's highly recommended to change the default colors
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
+//Global Config
+$tooltip-background: black;
 
 $primary: #001e3c;
 $secondary: #00b1ff;
@@ -25,12 +27,27 @@ $negative: #c10015;
 $info: #31ccec;
 $warning: #d98609;
 
+$layout: #071a2e;
 $active: #063250;
 $separator-dark-color: #253647;
 $gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) rgba(0, 30, 60, 0.8));
-//Global Config
-$tooltip-background: black;
-
+$disabled: #607d8b;
+// Revoked Label
+$rl-no: #4caf50;
+//Confidence Level Label
+$cl-none: $disabled;
+$cl-low: #f44336;
+$cl-moderate: #ff9800;
+$cl-good: #5c7bf5;
+$cl-strong: $positive;
+//Marking
+$amber: #d84315;
+// Processing Status
+$ps-disabled: $disabled;
+$ps-new: #ff9800;
+$ps-inprogress: #5c7bf5;
+$ps-analyzed: $positive;
+$ps-closed: $disabled;
 // Labels color
 $blog-post: #ebff76;
 $malware: #f38428;

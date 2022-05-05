@@ -67,6 +67,12 @@
   display: none;
 }
 :root {
+  .text-layout {
+    color: $layout !important;
+  }
+  .bg-layout {
+    background: $layout !important;
+  }
   .text-tertiary {
     color: $tertiary !important;
   }
@@ -92,6 +98,89 @@
   .bg-active {
     background: $active !important;
   }
+  //REVOKED LABEL
+  .text-rl-no {
+    color: $rl-no !important;
+  }
+  .bg-rl-no {
+    background: $rl-no !important;
+  }
+  //CONFIDENCE LEVEL LABEL
+  .text-cl-none {
+    color: $cl-none !important;
+  }
+  .bg-cl-none {
+    background: $cl-none !important;
+  }
+  .text-cl-low {
+    color: $cl-low !important;
+  }
+  .bg-cl-low {
+    background: $cl-low !important;
+  }
+  //
+  .text-cl-moderate {
+    color: $cl-moderate !important;
+  }
+  .bg-cl-moderate {
+    background: $cl-moderate !important;
+  }
+  //
+  .text-cl-good {
+    color: $cl-good !important;
+  }
+  .bg-cl-good {
+    background: $cl-good !important;
+  }
+  //
+  .text-cl-strong {
+    color: $cl-strong !important;
+  }
+  .bg-cl-strong {
+    background: $cl-strong !important;
+  }
+
+  //MARKING
+
+  .text-amber {
+    color: $amber !important;
+  }
+  .bg-amber {
+    background: $amber !important;
+  }
+
+  //PROCESSING STATUS
+  .text-ps-disabled {
+    color: $ps-disabled !important;
+  }
+  .bg-ps-disabled {
+    background: $ps-disabled !important;
+  }
+  .text-ps-new {
+    color: $ps-new !important;
+  }
+  .bg-ps-new {
+    background: $ps-new !important;
+  }
+  .text-ps-inprogress {
+    color: $ps-inprogress !important;
+  }
+  .bg-ps-inprogress {
+    background: $ps-inprogress !important;
+  }
+  .text-ps-analyzed {
+    color: $ps-analyzed !important;
+  }
+  .bg-ps-analyzed {
+    background: $ps-analyzed !important;
+  }
+  .text-ps-closed {
+    color: $ps-closed !important;
+  }
+  .bg-ps-closed {
+    background: $ps-closed !important;
+  }
+
   // LABEL
   .text-blog-post {
     color: $blog-post !important;

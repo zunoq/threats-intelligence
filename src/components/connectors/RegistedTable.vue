@@ -1,129 +1,327 @@
 <template lang="">
   <div class="col-12">
-    <q-table dark flat bordered class="bg-primary" :rows="rows" @row-click="onRowClick" />
+    <q-table
+      dark
+      flat
+      :rows="rows"
+      :columns="columns"
+      v-model:pagination="pagination"
+      row-key="name"
+      hide-bottom
+      :table-header-style="{ textTransform: 'uppercase' }"
+    >
+      <template #body="props">
+        <q-tr :props="props">
+          <q-td key="icon" class="text-center">
+            <q-icon
+              name="extension"
+              size="sm"
+              :color="props.row.status == 'active' ? `green` : 'red'"
+            />
+          </q-td>
+          <q-td key="name" :props="props" class="text-capitalize">
+            {{ truncate(props.row.name, 50) }}
+          </q-td>
+          <q-td key="type" :props="props" class="text-capitalize">
+            {{ props.row.type }}
+          </q-td>
+          <q-td key="automaticTrigger" :props="props" class="text-capitalize">
+            {{ props.row.automaticTrigger }}
+          </q-td>
+          <q-td key="message" :props="props" class="text-capitalize">
+            {{ props.row.message.length }}
+          </q-td>
+          <q-td key="modifiedDate" :props="props">
+            {{ dateconvert(props.row.modifiedDate) }}
+          </q-td>
+          <q-td key="action" :props="props">
+            <q-btn flat round icon="layers_clear" color="secondary">
+              <q-tooltip v-model="showing"> Clear this Connector </q-tooltip>
+            </q-btn>
+            <q-btn flat round icon="delete" color="secondary">
+              <q-tooltip v-model="showing"> Clear this Connector </q-tooltip>
+            </q-btn>
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
   </div>
 </template>
 <script>
 import { ref, defineComponent } from "vue";
+import { date } from "quasar";
 const columns = [
   {
     name: "icon",
-    label: "",
+    label: "#",
     align: "center",
-  },
-  {
-    name: "type",
-    required: true,
-    label: "Type",
-    align: "left",
-    field: (row) => row.type,
-    sortable: true,
   },
   {
     name: "name",
     required: true,
     align: "left",
-    label: "Name",
+    label: "name",
     field: (row) => row.name,
     sortable: true,
   },
   {
-    name: "author",
+    name: "type",
     required: true,
     align: "left",
-    label: "Author",
-    field: (row) => row.author,
+    label: "Type",
+    field: (row) => row.type,
     sortable: true,
   },
   {
-    name: "labels",
+    name: "automaticTrigger",
     required: true,
-    label: "Labels",
     align: "left",
-    field: (row) => row.labels,
+    label: "Automatic Trigger",
+    field: (row) => row.automaticTrigger,
+    sortable: true,
   },
   {
-    name: "credate",
+    name: "message",
     required: true,
-    label: "Creation Date",
+    label: "Message",
     align: "left",
-    field: (row) => row.credate,
+    field: (row) => row.message,
   },
   {
-    name: "marking",
+    name: "modifiedDate",
     required: true,
-    label: "Marking",
+    label: "Modified",
     align: "left",
-    field: (row) => row.marking,
+    field: (row) => row.modifiedDate,
+  },
+  {
+    name: "action",
+    required: true,
+    label: "",
+    align: "left",
+    style: "width: 100px",
   },
 ];
-
 const rows = [
   {
-    id: 1,
-    type: { name: "report", icon: "report" },
-    name: "Alert(TA14-353A1)",
-    marking: "tlp-red",
-    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
-    otherIDs: [
-      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
-      "report--e5a3759f-0a92-4315-988d-70e42952a488",
+    id: 0,
+    name: "LoqMissQ",
+    status: "active",
+    type: "Data Import",
+    automaticTrigger: "not applicable",
+    message: [],
+    modifiedDate: 1650340161065,
+    scope: "urhaus",
+    state: '{"last_run": 1651401843}',
+    listenQueue: "listen_949696ed-efa3-460f-be95-6538400b882c",
+    pushQueue: "push_949696ed-efa3-460f-be95-6538400b882c",
+    works: [
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 47621,
+        totalOperations: 47621,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 50195,
+        totalOperations: 50195,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 48340,
+        totalOperations: 48340,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus 3",
+        status: "complete",
+        operationsCompleted: 49835,
+        totalOperations: 49835,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
     ],
-    author: "RISKIQ",
-    revoked: "no",
-    labels: [],
-    platformcredate: 1650340161065,
-    credate: 1650340193318,
-    moddate: 1650340224516,
-    creator: "RISKIQ",
-    processStatus: "disabled",
-    description:
-      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
-    reportTypes: "threat-report",
+  },
+  {
+    id: 1,
+    name: "LoqMissQ",
+    status: "inactive",
+    type: "Data Import",
+    automaticTrigger: "automatic",
+    message: [],
+    modifiedDate: 1650340161065,
+    scope: "urhaus",
+    state: '{"last_run": 1651401843}',
+    listenQueue: "listen_949696ed-efa3-460f-be95-6538400b882c",
+    pushQueue: "push_949696ed-efa3-460f-be95-6538400b882c",
+    works: [
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 47621,
+        totalOperations: 47621,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 50195,
+        totalOperations: 50195,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 48340,
+        totalOperations: 48340,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus 3",
+        status: "complete",
+        operationsCompleted: 49835,
+        totalOperations: 49835,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+    ],
   },
   {
     id: 2,
-    type: { name: "report", icon: "report" },
-    name: "Alert(TA14-353A2)",
-    marking: "tlp-blue",
-    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
-    otherIDs: [
-      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
-      "report--e5a3759f-0a92-4315-988d-70e42952a488",
+    name: "LoqMissQ",
+    status: "inactive",
+    type: "Data Import",
+    automaticTrigger: "not applicable",
+    message: [],
+    modifiedDate: 1650340161065,
+    scope: "urhaus",
+    state: '{"last_run": 1651401843}',
+    listenQueue: "listen_949696ed-efa3-460f-be95-6538400b882c",
+    pushQueue: "push_949696ed-efa3-460f-be95-6538400b882c",
+    works: [
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 47621,
+        totalOperations: 47621,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 50195,
+        totalOperations: 50195,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 48340,
+        totalOperations: 48340,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus 3",
+        status: "complete",
+        operationsCompleted: 49835,
+        totalOperations: 49835,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
     ],
-    author: "RISKIQ",
-    revoked: "no",
-    labels: ["elf", "zloader"],
-    platformcredate: 1650340161065,
-    credate: 1650340193318,
-    moddate: 1650340224516,
-    creator: "RISKIQ",
-    processStatus: "disabled",
-    description:
-      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
-    reportTypes: "threat-report",
   },
   {
     id: 3,
-    type: { name: "report", icon: "report" },
-    name: "Alert(TA14-353A3)",
-    marking: "tlp-white",
-    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
-    otherIDs: [
-      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
-      "report--e5a3759f-0a92-4315-988d-70e42952a488",
+    name: "LoqMissQ",
+    status: "inactive",
+    type: "Data Import",
+    automaticTrigger: "not applicable",
+    message: [],
+    modifiedDate: 1650340161065,
+    scope: "urhaus",
+    state: '{"last_run": 1651401843}',
+    listenQueue: "listen_949696ed-efa3-460f-be95-6538400b882c",
+    pushQueue: "push_949696ed-efa3-460f-be95-6538400b882c",
+    works: [
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 47621,
+        totalOperations: 47621,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 50195,
+        totalOperations: 50195,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus run @ 2022-05-01 10:44:03",
+        status: "complete",
+        operationsCompleted: 48340,
+        totalOperations: 48340,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
+      {
+        name: "URLhaus 3",
+        status: "complete",
+        operationsCompleted: 49835,
+        totalOperations: 49835,
+        startTime: 1650340161065,
+        endTime: 16503401610,
+        progress: 50,
+        error: [],
+      },
     ],
-    author: "RISKIQ",
-    revoked: "no",
-    labels: ["avast", "zloader", "ransomeware", "backdoor"],
-    platformcredate: 1650340161065,
-    credate: 1650340193318,
-    moddate: 1650340224516,
-    creator: "RISKIQ",
-    processStatus: "disabled",
-    description:
-      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
-    reportTypes: "threat-report",
   },
 ];
 export default defineComponent({
@@ -133,11 +331,19 @@ export default defineComponent({
       rows,
     };
   },
-  methods: {
-    onRowClick(evt, row) {
-      console.log("clicked on", row);
+  computed: {
+    dateconvert() {
+      return (timeStamp) => {
+        return date.formatDate(timeStamp, "MMM DD, YYYY, HH:mm:ss A");
+      };
+    },
+
+    truncate() {
+      return (str, n) => {
+        return str.length > n ? str.substr(0, n - 1) + "..." : str;
+      };
     },
   },
 });
 </script>
-<style lang=""></style>
+<style scoped lang=""></style>

@@ -1,8 +1,6 @@
 <template>
   <div class="col-xs-12 col-md-12 col-lg-8">
-    <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
-      INGESTED ENTITIES
-    </div>
+    <div class="text-caption text-uppercase text-grey-4">INGESTED ENTITIES</div>
     <q-card dark flat bordered class="bg-primary light-font">
       <LineChart
         :chart-data="data"
@@ -17,8 +15,7 @@
 import { LineChart } from "vue-chart-3";
 import { ref, computed, onMounted } from "vue";
 import { Chart, registerables } from "chart.js";
-import gradient from "chartjs-plugin-gradient";
-Chart.register(...registerables, gradient);
+Chart.register(...registerables);
 const props = defineProps({
   data: {
     type: Object,
@@ -31,22 +28,11 @@ const data = computed(() => ({
   datasets: [
     {
       label: "Revenue",
-
       data: dataValues.value,
       borderWidth: 2,
       borderColor: "#00b1ff",
       radius: 3,
       tension: 0.3,
-      fill: true,
-      gradient: {
-        backgroundColor: {
-          axis: "y",
-          colors: {
-            0: "rgba(0, 177, 255,0.01)",
-            6000: "rgba(0, 177, 255,0.5)",
-          },
-        },
-      },
     },
   ],
 }));
@@ -79,4 +65,4 @@ const options = ref({
 });
 </script>
 
-<style></style>
+<style scoped></style>

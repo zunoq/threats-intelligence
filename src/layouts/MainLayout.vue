@@ -1,11 +1,11 @@
 <template>
   <q-layout view="hHh Lpr fFf">
-    <q-header class="bg-primary text-white" elevated>
+    <q-header class="bg-layout" flat dark elevated>
       <q-toolbar>
         <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <q-toolbar-title class="large-screen-only">
-          Threat Intelligence
-        </q-toolbar-title>
+        <div class="large-screen-only">
+          <img height="64" src="../assets/logo_bg.png" alt="" />
+        </div>
         <q-space />
 
         <q-input
@@ -14,7 +14,7 @@
           standout="bg-dark"
           v-model="text"
           input-class="text-left"
-          class="q-ml-md"
+          class="q-mx-sm"
           bg-color="active"
           :input-style="{ color: 'rgba(255,255,255,0.7)' }"
         >
@@ -28,7 +28,13 @@
             />
           </template>
         </q-input>
-        <q-btn flat round color="primary" icon="manage_search">
+        <q-btn
+          flat
+          round
+          color="primary"
+          icon="manage_search"
+          @click="advancedSearch"
+        >
           <q-tooltip> Advanced Search</q-tooltip>
         </q-btn>
         <div class="large-screen-only-navbar">
@@ -52,8 +58,9 @@
       show-if-above
       :width="200"
       :breakpoint="764"
-      class="medium-font bg-primary text-white"
+      class="medium-font bg-layout text-white"
       active-color="white"
+      flat
     >
       <q-scroll-area class="fit">
         <q-list>
@@ -64,11 +71,10 @@
 
             <q-item-section> Dashboard </q-item-section>
           </q-item>
-          <q-expansion-item expand-separator icon="cookie" label="Activities">
+          <q-expansion-item icon="cookie" label="Activities">
             <q-item
               clickable
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/analysis"
               active-class=" active-page"
@@ -84,7 +90,6 @@
               clickable
               active-class="active-page"
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/event"
               dense
@@ -98,7 +103,6 @@
               clickable
               active-class="active-page"
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/observations"
               dense
@@ -110,16 +114,11 @@
               <q-item-section> Observations </q-item-section>
             </q-item>
           </q-expansion-item>
-          <q-expansion-item
-            expand-separator
-            icon="psychology"
-            label="Knowledge"
-          >
+          <q-expansion-item icon="psychology" label="Knowledge">
             <q-item
               clickable
               active-class="active-page"
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/threats"
               dense
@@ -134,7 +133,6 @@
               clickable
               active-class="active-page"
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/arsenal"
               dense
@@ -149,11 +147,10 @@
         </q-list>
         <q-separator dark dense />
         <q-list>
-          <q-expansion-item expand-separator icon="storage" label="Data">
+          <q-expansion-item icon="storage" label="Data">
             <q-item
               clickable
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/entities"
               active-class=" active-page"
@@ -169,7 +166,6 @@
               clickable
               active-class="active-page"
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/backgroundtasks"
               dense
@@ -183,7 +179,6 @@
               clickable
               active-class="active-page"
               v-ripple
-              expand-separator
               class="q-pl-xl"
               to="/connectors"
               dense
@@ -213,12 +208,26 @@
 
 <script>
 import { ref } from "vue";
-
+import { useQuasar, useDialogPluginComponent } from "quasar";
 export default {
   setup() {
+    const $q = useQuasar();
+    const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
+      useDialogPluginComponent();
     return {
       text: ref(""),
       drawer: ref(false),
+      dialogRef,
+      onDialogHide,
+      onOKClick() {
+        console.log("object");
+        onDialogOK();
+        // or with payload: onDialogOK({ ... })
+        // ...and it will also hide the dialog automatically
+      },
+
+      // we can passthrough onDialogCancel directly
+      onCancelClick: onDialogCancel,
     };
   },
 };
@@ -230,11 +239,11 @@ export default {
 }
 .q-header {
   height: 64px;
-  border-bottom: 1px solid #07111b;
+  border-bottom: 1px solid #001;
   .q-toolbar {
     height: 64px;
     .q-icon {
-      color: rgba(255, 255, 255, 0.8);
+      color: #fff;
     }
     .q-btn {
       margin: 2px;
@@ -242,7 +251,7 @@ export default {
   }
 }
 .q-drawer {
-  border-right: 1px solid;
+  border-right: 1px solid $separator-dark-color;
   .q-item__section--side {
     color: #fff;
   }
@@ -253,8 +262,6 @@ export default {
   }
   .q-item__section--avatar {
     min-width: 30px;
-  }
-  .q-separator--horizontal {
   }
   .q-item__section--side {
     color: $secondary;

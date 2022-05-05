@@ -1,6 +1,6 @@
-<template lang="">
+<template>
   <div class="text-caption text-uppercase text-grey-4">ENTITY DETAILS</div>
-  <q-card class="my-card bg-primary q-my-md" dark>
+  <q-card class="my-card bg-primary q-my-sm" dark flat>
     <div class="row">
       <div class="col-6">
         <q-card-section class="row-12">
@@ -21,11 +21,7 @@
               Report types
             </div>
             <div class="col-12">
-              <q-chip
-                square
-                label="THREAT-REPORT"
-                class="report-types bg-blue text-uppercase text-center text-white"
-              />
+              <SquareLabel data="Threat-Report" color="blue-10" />
             </div>
           </q-card-section>
         </div>
@@ -34,27 +30,28 @@
             <div class="text-caption q-mb-sm text-secondary col-12">
               Processing status
             </div>
-            <q-chip
-              dark
-              outline
-              square
-              label="NEW"
-              class="marking text-uppercase text-center text-warning"
-            />
+            <OutlineSquareLabel data="new" str="ps" style="min-width: 100px" />
           </q-card-section>
         </div>
       </div>
     </div>
-    <q-card-section>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit
-    </q-card-section>
+    <q-card-section> </q-card-section>
   </q-card>
 </template>
 <script>
 import { defineComponent } from "vue";
-export default {};
+import PolarChart from "../chart/PolarChart.vue";
+import BlurBgSquareLabel from "../Others/BlurBgSquareLabel.vue";
+import MarkingLabel from "../Others/MarkingLabel.vue";
+import OutlineSquareLabel from "../Others/OutlineSquareLabel.vue";
+import RoundedLabel from "../Others/RoundedLabel.vue";
+import SquareLabel from "../Others/SquareLabel.vue";
+
+export default {
+  components: { OutlineSquareLabel, SquareLabel },
+};
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .report-types {
   padding: 16px 27px;
   margin: 0 5px 5px 0;

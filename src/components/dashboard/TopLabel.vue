@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-12 col-lg-4">
-    <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
+    <div class="text-caption text-uppercase text-grey-4">
       Top Label (last 3 months)
     </div>
     <q-card class="label-card" flat dark bordered>
@@ -9,8 +9,9 @@
           class="label-item col-4 q-pa-md"
           v-for="(label, idx) in labelsData"
           :key="idx"
-          :class="'bg-' + `${label.name}`"
+          :class="'text-' + `${label.name}`"
         >
+          <div class="bg" :class="'bg-' + `${label.name}`"></div>
           <div class="label-number text-bold">
             {{ label.number }}
           </div>
@@ -27,50 +28,10 @@
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "TopLabel",
-  props: ["topLabels"],
+  props: ["data"],
   data() {
     return {
-      labelsData: this.topLabels,
-      colorList: [
-        {
-          name: "avast",
-          text: "#e21483",
-          bgColor: "#441b52",
-        },
-        {
-          name: "zloader",
-          text: "#f38428",
-          bgColor: "#493d36",
-        },
-        {
-          text: "#9f8801",
-          bgColor: "#303e2a",
-        },
-        {
-          text: "#513c33",
-          bgColor: "#182739",
-        },
-        {
-          text: "#fe7431",
-          bgColor: "#4d3839",
-        },
-        {
-          text: "#ebff76",
-          bgColor: "#47624e",
-        },
-        {
-          text: "#9531eb",
-          bgColor: "#2d2471",
-        },
-        {
-          text: "#b6db34",
-          bgColor: "#37573a",
-        },
-        {
-          text: "#81dfb3",
-          bgColor: "#275860",
-        },
-      ],
+      labelsData: this.data,
     };
   },
   methods: {
@@ -90,17 +51,6 @@ export default defineComponent({
         }
       });
     },
-    hexToRGB(hex, alpha) {
-      var r = parseInt(hex.slice(1, 3), 16),
-        g = parseInt(hex.slice(3, 5), 16),
-        b = parseInt(hex.slice(5, 7), 16);
-
-      if (alpha) {
-        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
-      } else {
-        return "rgb(" + r + ", " + g + ", " + b + ")";
-      }
-    },
   },
   mounted() {
     this.nFormatter();
@@ -108,12 +58,22 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .label-card {
   // border: none;
   .label-item {
     position: relative;
     // border: none;
+    .bg {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0.3;
+      width: 100%;
+      height: 100%;
+    }
     .label-number {
       letter-spacing: 3px;
       @media (max-width: $breakpoint-xs-max) {

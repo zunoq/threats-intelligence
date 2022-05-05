@@ -57,7 +57,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .q-card {
   border-radius: 5px;
   box-sizing: border-box;

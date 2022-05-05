@@ -10,7 +10,7 @@
       selection="multiple"
       row-key="name"
       hide-bottom
-      :table-header-style="{ textTransform: 'uppercase'}"
+      :table-header-style="{ textTransform: 'uppercase' }"
     >
       <template #body="props">
         <q-tr :props="props" @click="onRowClick(props.row)">
@@ -28,7 +28,7 @@
             {{ props.row.type.name }}
           </q-td>
           <q-td key="name" :props="props" class="text-capitalize">
-            {{ props.row.name }}
+            {{ truncate(props.row.name, 50) }}
           </q-td>
           <q-td key="author" :props="props" class="text-capitalize">
             {{ props.row.author }}
@@ -53,15 +53,9 @@
             {{ dateconvert(props.row.credate) }}
           </q-td>
           <q-td key="marking" :props="props">
-            <q-chip
-              dark
-              square
-              :color="`${handleMarking(props.row.marking)}`"
-              class="marking text-uppercase text-center"
-              :class="props.row.marking == 'tlp:white' ? 'text-black' : ' '"
-            >
-              {{ props.row.marking }}
-            </q-chip>
+            <div>
+              <MarkingItem :data="props.row.marking" />
+            </div>
           </q-td>
         </q-tr>
       </template>
@@ -71,6 +65,7 @@
 
 <script>
 import { ref, defineComponent } from "vue";
+import MarkingItem from "../Others/MarkingLabel.vue";
 import { date } from "quasar";
 const columns = [
   {
@@ -125,78 +120,14 @@ const columns = [
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    type: { name: "report", icon: "report" },
-    name: "Alert(TA14-353A1)",
-    marking: "tlp:red",
-    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
-    otherIDs: [
-      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
-      "report--e5a3759f-0a92-4315-988d-70e42952a488",
-    ],
-    author: "RISKIQ",
-    revoked: "no",
-    labels: [],
-    platformcredate: 1650340161065,
-    credate: 1650340193318,
-    moddate: 1650340224516,
-    creator: "RISKIQ",
-    processStatus: "disabled",
-    description:
-      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
-    reportTypes: "threat-report",
-  },
-  {
-    id: 2,
-    type: { name: "report", icon: "report" },
-    name: "Alert(TA14-353A2)",
-    marking: "tlp:blue",
-    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
-    otherIDs: [
-      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
-      "report--e5a3759f-0a92-4315-988d-70e42952a488",
-    ],
-    author: "RISKIQ",
-    revoked: "no",
-    labels: ["elf", "zloader"],
-    platformcredate: 1650340161065,
-    credate: 1650340193318,
-    moddate: 1650340224516,
-    creator: "RISKIQ",
-    processStatus: "disabled",
-    description:
-      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
-    reportTypes: "threat-report",
-  },
-  {
-    id: 3,
-    type: { name: "report", icon: "report" },
-    name: "Alert(TA14-353A3)",
-    marking: "tlp:white",
-    standardID: "report--c3dab810-3b4a-5c6b-b848-f935e13ea6c8",
-    otherIDs: [
-      "report--86199b49-10c5-4f21-b27a-d1dcd4eb65d5",
-      "report--e5a3759f-0a92-4315-988d-70e42952a488",
-    ],
-    author: "RISKIQ",
-    revoked: "no",
-    labels: ["avast", "zloader", "ransomeware", "backdoor"],
-    platformcredate: 1650340161065,
-    credate: 1650340193318,
-    moddate: 1650340224516,
-    creator: "RISKIQ",
-    processStatus: "disabled",
-    description:
-      "Microsoft recently announced a joint investigation of multiple security companies and information sharing and analysis centers (ISACs) with the aim to take down the Zloader botnet and took the whole case to court. In this study Avast looks into Zloader 2, showing how it works and its code peculiarities. Included in this blog posts are results of their deep dive into the botnets and campaigns and show some interesting connections between Zloader and other malware families.",
-    reportTypes: "threat-report",
-  },
-];
-
 export default defineComponent({
+  props: ["data"],
+  components: {
+    MarkingItem,
+  },
   data() {
     return {
+      rows: this.data,
       pagination: {
         page: 1,
         rowsPerPage: 0, // 0 means all rows
@@ -208,7 +139,6 @@ export default defineComponent({
     return {
       selected,
       columns,
-      rows,
     };
   },
   methods: {
@@ -224,9 +154,10 @@ export default defineComponent({
         return date.formatDate(timeStamp, "MMM DD, YYYY");
       };
     },
-    handleMarking() {
-      return (val) => {
-        return val.slice(4, val.length);
+
+    truncate() {
+      return (str, n) => {
+        return str.length > n ? str.substr(0, n - 1) + "..." : str;
       };
     },
   },
@@ -235,17 +166,4 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="scss" scoped>
-.marking {
-  padding: 5px 10px;
-}
-.q-chip {
-  border-radius: 0px;
-  font-size: 12px;
-  height: 20px;
-  width: 90px;
-  .q-chip__content {
-    display: block;
-  }
-}
-</style>
+<style scoped lang="scss"></style>

@@ -1,6 +1,6 @@
 <template>
   <div class="col-xs-12 col-md-12 col-lg-6">
-    <div class="text-subtitle3 text-secondary q-py-xs text-uppercase">
+    <div class="text-caption text-uppercase text-grey-4">
       TOP 10 ACTIVE ENTITIES (3 LAST MONTHS)
     </div>
     <q-card dark flat bordered class="bg-primary light-font">
@@ -63,4 +63,4 @@ const options = ref({
 });
 </script>
 
-<style></style>
+<style scoped></style>

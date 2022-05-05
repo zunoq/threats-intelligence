@@ -27,6 +27,7 @@ const data = computed(() => ({
     },
   ],
 }));
+
 const options = ref({
   resonsive: true,
   elements: {},
@@ -63,4 +64,4 @@ const options = ref({
 });
 </script>
 
-<style></style>
+<style scoped></style>
