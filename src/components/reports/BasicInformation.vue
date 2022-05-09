@@ -119,7 +119,7 @@
       <q-card-section class="col-6">
         <div class="text-caption q-mb-sm text-secondary">Marking</div>
         <div>
-          <MarkingLabel :data="entity.marking" />
+          <MarkingLabel :data="entity.marking" style="height: 25px" />
         </div>
       </q-card-section>
     </q-card>

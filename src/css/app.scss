@@ -98,6 +98,12 @@
   .bg-active {
     background: $active !important;
   }
+  .text-disabled {
+    color: $disabled !important;
+  }
+  .bg-disabled {
+    background: $disabled !important;
+  }
   //REVOKED LABEL
   .text-rl-no {
     color: $rl-no !important;
@@ -179,6 +185,18 @@
   }
   .bg-ps-closed {
     background: $ps-closed !important;
+  }
+  .text-ps-complete {
+    color: $ps-complete !important;
+  }
+  .bg-ps-complete {
+    background: $ps-complete !important;
+  }
+  .text-ps-progressing {
+    color: $ps-progressing !important;
+  }
+  .bg-ps-progressing {
+    background: $ps-progressing !important;
   }
 
   // LABEL

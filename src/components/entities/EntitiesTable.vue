@@ -35,18 +35,16 @@
           </q-td>
           <q-td key="labels" :props="props" auto-width>
             <div v-if="props.row.labels.length != 0">
-              <span
-                class="q-mx-xs"
+              <RoundedLabel
                 v-for="(label, idx) in props.row.labels"
                 :key="idx"
-              >
-                <q-badge :color="label" outline rounded> {{ label }}</q-badge>
-              </span>
+                :data="label"
+                str=""
+                class="q-ma-xs"
+              />
             </div>
             <div v-else>
-              <span class="q-mx-xs">
-                <q-badge color="white" outline rounded> no label</q-badge>
-              </span>
+              <RoundedLabel data=" no label" str="" class="text-disabled" />
             </div>
           </q-td>
           <q-td key="credate" :props="props">
@@ -54,7 +52,7 @@
           </q-td>
           <q-td key="marking" :props="props">
             <div>
-              <MarkingItem :data="props.row.marking" />
+              <MarkingLabel :data="props.row.marking" />
             </div>
           </q-td>
         </q-tr>
@@ -65,7 +63,8 @@
 
 <script>
 import { ref, defineComponent } from "vue";
-import MarkingItem from "../Others/MarkingLabel.vue";
+import MarkingLabel from "../Others/MarkingLabel.vue";
+import RoundedLabel from "../Others/RoundedLabel.vue";
 import { date } from "quasar";
 const columns = [
   {
@@ -123,7 +122,8 @@ const columns = [
 export default defineComponent({
   props: ["data"],
   components: {
-    MarkingItem,
+    MarkingLabel,
+    RoundedLabel,
   },
   data() {
     return {

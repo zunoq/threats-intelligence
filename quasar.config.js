@@ -15,6 +15,11 @@ const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
+  const axios = require('axios').create({
+    baseURL: 'http://192.168.1.4:8080/' ?? 'http://localhost:8080/',
+    responseType: 'json',
+    withCredentials: true
+  })
   return {
     // https://v2.quasar.dev/quasar-cli-webpack/supporting-ts
     supportTS: false,
@@ -26,7 +31,7 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
-
+      'axios'
 
     ],
 
@@ -56,6 +61,9 @@ module.exports = configure(function (ctx) {
       // transpile: false,
       // publicPath: '/',
 
+      env: {
+        API: "http://localhost:8080"
+      },
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
       // Applies only if "transpile" is set to true.

@@ -33,7 +33,7 @@ $separator-dark-color: #253647;
 $gradient: linear-gradient(90deg, rgba(255, 255, 255, 0) rgba(0, 30, 60, 0.8));
 $disabled: #607d8b;
 // Revoked Label
-$rl-no: #4caf50;
+$rl-no: $positive;
 //Confidence Level Label
 $cl-none: $disabled;
 $cl-low: #f44336;
@@ -48,6 +48,8 @@ $ps-new: #ff9800;
 $ps-inprogress: #5c7bf5;
 $ps-analyzed: $positive;
 $ps-closed: $disabled;
+$ps-complete: $positive;
+$ps-progressing: $ps-inprogress;
 // Labels color
 $blog-post: #ebff76;
 $malware: #f38428;

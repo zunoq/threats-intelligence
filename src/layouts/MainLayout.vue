@@ -28,13 +28,7 @@
             />
           </template>
         </q-input>
-        <q-btn
-          flat
-          round
-          color="primary"
-          icon="manage_search"
-          @click="advancedSearch"
-        >
+        <q-btn flat round color="primary" icon="manage_search">
           <q-tooltip> Advanced Search</q-tooltip>
         </q-btn>
         <div class="large-screen-only-navbar">

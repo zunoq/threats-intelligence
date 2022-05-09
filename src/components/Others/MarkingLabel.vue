@@ -34,6 +34,5 @@ export default defineComponent({
   padding: 1px 14px;
   font-size: 12px;
   max-width: 90px;
-  max-height: 20px;
 }
 </style>

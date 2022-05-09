@@ -46,11 +46,7 @@
           </div>
           <div class="col-3">
             <div class="label row-12 q-py-xs text-secondary">Status</div>
-            <span
-              class="status text-uppercase"
-              :class="task.status == 'complete' ? 'complete' : 'progressing'"
-              >{{ task.status }}
-            </span>
+            <BlurBgSquareLabel :data="task.status" str="ps" />
           </div>
           <div class="label q-py-xs q-mt-md text-secondary">Progress</div>
           <q-linear-progress
@@ -118,6 +114,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { date } from "quasar";
+import BlurBgSquareLabel from "../Others/BlurBgSquareLabel.vue";
 const columns = [
   {
     name: "timeStamp",
@@ -143,6 +140,7 @@ const columns = [
 ];
 export default defineComponent({
   props: ["data"],
+  components: { BlurBgSquareLabel },
   setup() {
     return {
       dialog: ref(false),

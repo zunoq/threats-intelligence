@@ -1,9 +1,18 @@
 <template>
-  <q-page class="flex flex-center q-gutter-md">
-    <BlurBgSquareLabel data="no" str="rl" />
-    <OutlineSquareLabel data="osint" str="" />
-    <RoundedLabel data="osint" str="" />
-    <SquareLabel data="threat-report" color="primary"/>
+  <q-page class="flex flex-center">
+    <div class="q-gutter-md">
+      <BlurBgSquareLabel data="no" str="rl" />
+      <OutlineSquareLabel data="osint" str="" />
+      <RoundedLabel data="osint" str="" />
+      <SquareLabel data="threat-report" color="primary" />
+      <q-input
+        v-model="text"
+        label="Name"
+        dark
+        color="secondary"
+        
+      />
+    </div>
   </q-page>
 </template>
 
@@ -15,6 +24,11 @@ import RoundedLabel from "../components/Others/RoundedLabel.vue";
 import SquareLabel from "../components/Others/SquareLabel.vue";
 export default defineComponent({
   name: "ArsenalPage",
-  components: { BlurBgSquareLabel, OutlineSquareLabel, RoundedLabel, SquareLabel },
+  components: {
+    BlurBgSquareLabel,
+    OutlineSquareLabel,
+    RoundedLabel,
+    SquareLabel,
+  },
 });
 </script>
