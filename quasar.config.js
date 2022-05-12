@@ -16,7 +16,7 @@ const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
   const axios = require('axios').create({
-    baseURL: 'http://192.168.1.4:8080/' ?? 'http://localhost:8080/',
+    baseURL: 'http://192.168.1.3:8080/',
     responseType: 'json',
     withCredentials: true
   })
@@ -53,7 +53,7 @@ module.exports = configure(function (ctx) {
       'roboto-font', // optional, you are not bound to it
       'material-icons', // optional, you are not bound to it
     ],
-
+    animations: 'all',
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-build
     build: {
       vueRouterMode: 'history', // available values: 'hash', 'history'
@@ -62,7 +62,7 @@ module.exports = configure(function (ctx) {
       // publicPath: '/',
 
       env: {
-        API: "http://localhost:8080"
+        API: "http://192.168.1.3:8080/"
       },
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).

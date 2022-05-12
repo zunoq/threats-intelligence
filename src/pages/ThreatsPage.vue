@@ -1,40 +1,39 @@
 <template>
-  <q-page class="flex">
-    <div class="q-gutter-sm q-ma-sm">
-      <ApiRootCard />
-      <q-btn
-        unelevated
-        round
-        color="accent"
-        size="lg"
-        icon="add"
-        class="add-btn"
-        @click="addAPI('right')"
+  <q-page class="container q-pa-md">
+    <div class="row q-col-gutter-sm" v-if="apiRoots.length != 0">
+      <ApiRootCard
+        v-for="apiRoot in apiRoots"
+        :data="apiRoot"
+        :key="apiRoot.name"
       />
     </div>
+    <div v-else flex flex-center>
+      <h3 class="text-secondary">No API Roots Available</h3>
+    </div>
+    <q-btn
+      unelevated
+      round
+      color="accent"
+      size="lg"
+      icon="add"
+      class="add-btn"
+      @click="addAPI()"
+    />
   </q-page>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { useQuasar } from "quasar";
-import ApiRootCard from "../components/data/ApiRootCard.vue";
-import RoundedLabel from "../components/Others/RoundedLabel.vue";
+import ApiRootCard from "../components/data/APIRootCard.vue";
 import AddAPIRoot from "../components/plugins/AddAPIRoot.vue";
-import { api, axios } from "boot/axios";
+import restService from "../services/rest.service.js";
 export default defineComponent({
   name: "ThreatsPage",
   components: { ApiRootCard },
   data() {
     return {
-      apiRoots: [
-        {
-          name: "malware",
-          description:
-            "lorem ipsum dolor sit amet, consectetur adipiscing elit",
-          date: 1651990350807,
-        },
-      ],
+      apiRoots: [],
     };
   },
   setup() {},
@@ -43,10 +42,6 @@ export default defineComponent({
       this.$q
         .dialog({
           component: AddAPIRoot,
-          componentProps: {
-            data: "osint",
-            str: "",
-          },
         })
         .onOk(() => {
           console.log("OK");
@@ -58,13 +53,12 @@ export default defineComponent({
           console.log("Called on OK or Cancel");
         });
     },
-    getAPIRoot() {
-      axios.get(`${process.env.API}/server/apiroots/`).then((res) => {
-        console.log(res);
-      });
+    async getAPIRoot() {
+      let res = await restService.get("/server/apiroots/");
+      this.apiRoots = res;
     },
   },
-  created() {
+  mounted() {
     this.getAPIRoot();
   },
 });

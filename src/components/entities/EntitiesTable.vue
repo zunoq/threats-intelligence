@@ -13,7 +13,11 @@
       :table-header-style="{ textTransform: 'uppercase' }"
     >
       <template #body="props">
-        <q-tr :props="props" @click="onRowClick(props.row)">
+        <q-tr
+          :props="props"
+          @click="onRowClick(props.row)"
+          class="cursor-pointer"
+        >
           <q-td key="checkbox" auto-width>
             <q-checkbox
               v-model="props.selected"
@@ -44,7 +48,7 @@
               />
             </div>
             <div v-else>
-              <RoundedLabel data=" no label" str="" class="text-disabled" />
+              <RoundedLabel data="no label" str="" class="text-disabled" />
             </div>
           </q-td>
           <q-td key="credate" :props="props">

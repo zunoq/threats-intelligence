@@ -104,6 +104,19 @@
   .bg-disabled {
     background: $disabled !important;
   }
+  .text-true {
+    color: $positive !important;
+  }
+  .bg-true {
+    background: $positive !important;
+  }
+  .text-false {
+    color: $disabled !important;
+  }
+  .bg-false {
+    background: $disabled !important;
+  }
+
   //REVOKED LABEL
   .text-rl-no {
     color: $rl-no !important;
@@ -145,7 +158,7 @@
   .bg-cl-strong {
     background: $cl-strong !important;
   }
-
+  
   //MARKING
 
   .text-amber {
@@ -311,5 +324,12 @@
   }
   .bg-zloader {
     background: $zloader !important;
+  }
+  //
+  .text-malicious-activity {
+    color: $malicious-activity !important;
+  }
+  .bg-malicious-activity {
+    background: $malicious-activity !important;
   }
 }

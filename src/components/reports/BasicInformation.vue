@@ -6,7 +6,7 @@
         <div class="text-caption q-mb-sm text-secondary">
           Standard STIX ID
           <q-icon name="info" color="secondary" size="20px">
-            <q-tooltip v-model="showing">
+            <q-tooltip>
               In CTI,a predictable STIX ID is generated based on one or multiple
               attributes of entities
             </q-tooltip>
@@ -20,9 +20,7 @@
         <div class="text-caption q-mb-sm text-secondary">
           Other STIX IDs
           <q-icon name="info" color="secondary" size="20px">
-            <q-tooltip v-model="showing">
-              Other known STIX IDs for this entity
-            </q-tooltip>
+            <q-tooltip> Other known STIX IDs for this entity </q-tooltip>
           </q-icon>
         </div>
         <div

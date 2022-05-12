@@ -5,20 +5,55 @@
     @hide="onDialogHide"
     transition-show="slide-left"
     transition-hide="slide-right"
+    transition-duration="500"
+    v-close-popup
   >
-    <q-card class="q-dialog-plugin q-pa-lg text-tertinary card" dark flat>
-      <q-input v-model="text" label="Name" dark color="secondary" />
-      <q-input
-        v-model="text"
-        autogrow
-        type="textarea"
-        dark
-        color="secondary"
-        label="Description"
-      />
+    <q-card
+      class="q-dialog-plugin q-pa-lg text-tertinary card q-mb-lg"
+      dark
+      flat
+    >
+      <q-form @submit.prevent="sendAPIRoot" class="q-gutter-md">
+        <q-input
+          v-model="apr.name"
+          label="Name"
+          type="text"
+          dark
+          color="accent"
+        />
+        <q-input
+          v-model="apr.title"
+          autogrow
+          type="text"
+          dark
+          color="accent"
+          label="Title"
+        />
+        <q-input
+          v-model="apr.description"
+          autogrow
+          type="text"
+          dark
+          color="accent"
+          label="Description"
+        />
+        <q-input
+          v-model.number="apr.max_content_length"
+          type="number"
+          dark
+          color="accent"
+          label="Max Content Length"
+        />
+      </q-form>
       <q-card-actions align="right" class="card-action">
         <q-btn flat color="secondary" label="Cancel" @click="onCancelClick" />
-        <q-btn flat color="accent" label="Create" @click="sendAPIRoot" />
+        <q-btn
+          flat
+          color="accent"
+          type="submit"
+          label="Create"
+          @click="sendAPIRoot"
+        />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -26,7 +61,8 @@
 
 <script>
 import { useDialogPluginComponent } from "quasar";
-import { uid } from "quasar";
+import formService from "../../services/form.service";
+import { ref } from "vue";
 export default {
   props: {
     // ...your custom props
@@ -39,19 +75,23 @@ export default {
   ],
   data() {
     return {
-      apiRoot: {
-        id: uid(),
+      apr: {
         name: "",
+        title: "",
         description: "",
-        date: Date.now(),
+        max_content_length: null,
       },
-    methods: {
-      sendAPIRoot() {
-        let formData = new FormData();
-        formData.append("id", this.apiRoot.id)
-      }
-    }
     };
+  },
+  methods: {
+    sendAPIRoot() {
+      console.log(this.apr);
+      formService.post("/server/apiroots/", this.apr).then((res) => {
+        console.log(res).catch((err) => {
+          console.log(err);
+        });
+      });
+    },
   },
 
   setup() {

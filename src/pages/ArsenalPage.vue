@@ -5,13 +5,7 @@
       <OutlineSquareLabel data="osint" str="" />
       <RoundedLabel data="osint" str="" />
       <SquareLabel data="threat-report" color="primary" />
-      <q-input
-        v-model="text"
-        label="Name"
-        dark
-        color="secondary"
-        
-      />
+      <q-input v-model="text" label="Name" dark color="secondary" />
     </div>
   </q-page>
 </template>
@@ -29,6 +23,10 @@ export default defineComponent({
     OutlineSquareLabel,
     RoundedLabel,
     SquareLabel,
+  },
+  mounted() {
+    let newDate = new Date("2022-05-07T11:01:41.900Z");
+    console.log(newDate.getTime());
   },
 });
 </script>

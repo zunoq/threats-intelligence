@@ -1,5 +1,6 @@
 
 const routes = [
+  { path: '/login', component: () => import('src/layouts/LoginLayout.vue') },
   {
     path: '/',
     redirect: '/dashboard',
@@ -16,6 +17,9 @@ const routes = [
       { path: '/settings', component: () => import('pages/SettingsPage.vue') },
       { path: '/connectors', component: () => import('pages/ConnectorsPage.vue') },
       { path: '/entities/reports/:id', component: () => import('src/pages/uniquepage/ReportPage.vue') },
+      { path: '/threats/:apiRootName', component: () => import('pages/uniquepage/APIRootPage.vue') },
+      { path: '/threats/:apiRootName/:collectionId', component: () => import('pages/uniquepage/CollectionPage.vue') },
+      { path: '/threats/:apiRootName/:collectionId/:objectId', component: () => import('pages/uniquepage/ObjectPage.vue') },
     ]
   },
 

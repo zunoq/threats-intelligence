@@ -2,8 +2,7 @@
   <q-layout view="hHh Lpr fFf">
     <q-header class="bg-layout" flat dark elevated>
       <q-toolbar>
-        <q-btn flat @click="drawer = !drawer" round dense icon="menu" />
-        <div class="large-screen-only">
+        <div class="large-screen-only" @click="drawer = !drawer">
           <img height="64" src="../assets/logo_bg.png" alt="" />
         </div>
         <q-space />
@@ -42,7 +41,18 @@
           <q-btn flat round color="primary" icon="upload">
             <q-tooltip> Data Import </q-tooltip></q-btn
           >
-          <q-btn flat round color="primary" icon="account_circle"> </q-btn>
+          <q-btn flat round color="primary" icon="account_circle">
+            <q-menu fit auto-close square flat>
+              <q-list class="bg-primary">
+                <q-item clickable dark>
+                  <q-item-section>Profile</q-item-section>
+                </q-item>
+                <q-item clickable dark @click="logout">
+                  <q-item-section>Logout</q-item-section>
+                </q-item>
+              </q-list>
+            </q-menu>
+          </q-btn>
         </div>
       </q-toolbar>
     </q-header>
@@ -203,7 +213,13 @@
 <script>
 import { ref } from "vue";
 import { useQuasar, useDialogPluginComponent } from "quasar";
+import userService from "../services/user.service";
 export default {
+  methods: {
+    logout() {
+      userService.logout();
+    },
+  },
   setup() {
     const $q = useQuasar();
     const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } =
@@ -251,8 +267,6 @@ export default {
   }
   .active-page {
     background-color: $active;
-  }
-  .q-item__section--icon {
   }
   .q-item__section--avatar {
     min-width: 30px;

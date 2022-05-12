@@ -1,53 +1,68 @@
 <template lang="">
-  <div>
+  <div class="col-auto">
     <q-card class="my-card bg-primary" dark flat bordered>
-      <q-item>
-        <q-item-section avatar>
-          <q-avatar class="bg-malware text-uppercase">
-            {{ getFirstLetter("malware") }}
-          </q-avatar>
-        </q-item-section>
-
-        <q-item-section>
-          <q-item-label>Malware</q-item-label>
-          <q-item-label class="text-grey-6" caption>Subhead</q-item-label>
-        </q-item-section>
-        <div>
-          <q-btn round flat icon="more_vert">
-            <q-menu fit auto-close square flat>
-              <q-list class="bg-primary">
-                <q-item clickable dark>
-                  <q-item-section>Remove</q-item-section>
-                </q-item>
-                <q-item clickable dark>
-                  <q-item-section>Add To Favourite</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-btn>
-        </div>
-      </q-item>
-
-      <q-card-section>
-        {{ truncate(string, 125) }}
-      </q-card-section>
-      <q-card-section>
-        <RoundedLabel data="osint" str="" />
-      </q-card-section>
+      <div
+        v-ripple
+        @click.stop="onCardClick()"
+        class="cursor-pointer relative-position layout"
+      >
+        <q-item>
+          <q-item-section avatar>
+            <q-avatar class="bg-secondary text-uppercase">
+              {{ getFirstLetter(apiRoot.title) }}
+            </q-avatar>
+          </q-item-section>
+          <q-item-section>
+            <q-item-label class="text-uppercase">{{
+              apiRoot.title
+            }}</q-item-label>
+            <q-item-label class="text-grey-5" caption>{{
+              apiRoot.name
+            }}</q-item-label>
+          </q-item-section>
+          <div class="action">
+            <q-btn round flat @click.stop="show = true" icon="more_vert">
+              <q-menu fit auto-close square flat>
+                <q-list class="bg-primary">
+                  <q-item clickable dark>
+                    <q-item-section>Edit</q-item-section>
+                  </q-item>
+                  <q-item clickable dark>
+                    <q-item-section>Remove</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
+            </q-btn>
+          </div>
+        </q-item>
+        <q-card-section>
+          {{ truncate(apiRoot.description, 150) }}
+        </q-card-section>
+        <q-card-section>
+          Max content length: {{ apiRoot.max_content_length }}
+        </q-card-section>
+      </div>
     </q-card>
   </div>
 </template>
 <script>
 import { defineComponent } from "vue";
-import RoundedLabel from "../Others/RoundedLabel.vue";
+import { date, Notify } from "quasar";
+import restService from "../../services/rest.service";
 export default defineComponent({
   name: "ApiRootCard",
-  components: { RoundedLabel },
+  components: {},
+  props: ["data"],
   data() {
     return {
-      string:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      apiRoot: this.data,
     };
+  },
+  methods: {
+    onCardClick() {
+      this.$q.localStorage.set("apiRoot", this.apiRoot);
+      this.$router.push("/threats/" + this.apiRoot.name);
+    },
   },
   computed: {
     getFirstLetter() {
@@ -60,12 +75,23 @@ export default defineComponent({
         return str.length > n ? str.substr(0, n - 1) + "..." : str;
       };
     },
+    dateconvert() {
+      return (timeStamp) => {
+        if (typeof timeStamp == "integer")
+          return date.formatDate(timeStamp, "MMM DD, YYYY");
+        else {
+          return date.formatDate(new Date(timeStamp), "MMM DD, YYYY");
+        }
+      };
+    },
   },
 });
 </script>
 <style scoped lang="scss">
 .my-card {
-  width: 435px;
-  height: 195px;
+  min-width: 400px;
+  .card-title {
+    padding: 12px 16px 8px 16px;
+  }
 }
 </style>
