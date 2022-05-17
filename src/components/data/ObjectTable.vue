@@ -39,8 +39,14 @@
             {{ dateconvert(props.row.created) }}
           </q-td>
           <q-td key="action" :props="props" auto-width>
-            <q-btn flat round icon="delete" color="secondary">
-              <q-tooltip> Delete this Root </q-tooltip>
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="secondary"
+              @click.stop="deleteObject(props.row)"
+            >
+              <q-tooltip> Delete this Object </q-tooltip>
             </q-btn>
           </q-td>
         </q-tr>
@@ -51,6 +57,7 @@
 <script>
 import { defineComponent } from "vue";
 import { date, Notify, useQuasar } from "quasar";
+import Service from "../../services/rest.service";
 import RoundedLabel from "../Others/RoundedLabel.vue";
 const columns = [
   {
@@ -128,6 +135,9 @@ export default defineComponent({
           "/" +
           row.id
       );
+    },
+    deleteObject(row) {
+      Service.delete(`/server/apiroots/${this.apiRoot.name}/${this.collection.id}/${row.id}`);
     },
   },
   setup() {

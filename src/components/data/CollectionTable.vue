@@ -32,10 +32,16 @@
           </q-td>
           <q-td key="action" :props="props" auto-width>
             <q-btn flat round icon="brush" color="secondary" class="q-mr-md">
-              <q-tooltip> Edit this Root </q-tooltip>
+              <q-tooltip> Edit this Collection </q-tooltip>
             </q-btn>
-            <q-btn flat round icon="delete" color="secondary">
-              <q-tooltip> Delete this Root </q-tooltip>
+            <q-btn
+              flat
+              round
+              icon="delete"
+              color="secondary"
+              @click.stop="deleteCollection(props.row)"
+            >
+              <q-tooltip> Delete this Collection </q-tooltip>
             </q-btn>
           </q-td>
         </q-tr>
@@ -46,6 +52,7 @@
 <script>
 import { defineComponent } from "vue";
 import { date, Notify, useQuasar } from "quasar";
+import Service from "../../services/rest.service";
 import BlurBgSquareLabel from "../Others/BlurBgSquareLabel.vue";
 const columns = [
   {
@@ -107,6 +114,9 @@ export default defineComponent({
       console.log("clicked on", row);
       this.$q.localStorage.set("collection", row);
       this.$router.push("/threats/" + this.apiRoot.name + "/" + row.id);
+    },
+    deleteCollection(row) {
+      Service.delete(`/server/apiroots/${this.apiRoot.name}/${row.id}`);
     },
   },
   setup() {
