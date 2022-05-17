@@ -8,7 +8,7 @@
       />
     </div>
     <div v-else flex flex-center>
-      <h3 class="text-secondary">No API Roots Available</h3>
+      <h3 class="text-secondary">API Root không có sẵn. Hãy tạo mới</h3>
     </div>
     <q-btn
       unelevated
@@ -34,6 +34,7 @@ export default defineComponent({
   data() {
     return {
       apiRoots: [],
+      update: false,
     };
   },
   setup() {},
@@ -44,7 +45,7 @@ export default defineComponent({
           component: AddAPIRoot,
         })
         .onOk(() => {
-          console.log("OK");
+          this.update = true;
         })
         .onCancel(() => {
           console.log("Cancel");

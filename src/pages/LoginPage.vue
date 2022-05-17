@@ -1,8 +1,13 @@
 <template>
   <div class="container q-pa-md">
-    <div class="loginform">
-      <q-form class="q-gutter-md" @submit.prevent="submitForm">
-        <q-input label="Email" v-model="login.email"> </q-input>
+    <div class="loginform" dark>
+      <q-form
+        class="q-gutter-md"
+        @submit.prevent="submitForm"
+        autocomplete="off"
+        dark
+      >
+        <q-input label="Email" v-model="login.email" type="email"> </q-input>
         <q-input label="Password" type="password" v-model="login.password">
         </q-input>
         <div>

@@ -2,45 +2,23 @@
   <!-- notice dialogRef here -->
   <q-dialog
     ref="dialogRef"
-    @hide="onDialogHide"
     full-height
+    @hide="onDialogHide"
     transition-show="slide-left"
     transition-hide="slide-right"
     transition-duration="500"
     v-close-popup
   >
     <q-card class="q-dialog-plugin q-pa-lg text-tertinary card" dark flat>
-      
-      <q-form @submit.prevent="sendAPIRoot" class="q-gutter-md">
+      <div class="text-h6 text-accent q-my-lg">Create new Object</div>
+      <q-form @submit.prevent="sendObject" class="q-gutter-md">
         <q-input
-          v-model="apr.name"
-          label="Name"
-          type="text"
           dark
+          v-model="object.json"
+          filled
           color="accent"
-        />
-        <q-input
-          v-model="apr.title"
-          autogrow
-          type="text"
-          dark
-          color="accent"
-          label="Title"
-        />
-        <q-input
-          v-model="apr.description"
-          autogrow
-          type="text"
-          dark
-          color="accent"
-          label="Description"
-        />
-        <q-input
-          v-model.number="apr.max_content_length"
-          type="number"
-          dark
-          color="accent"
-          label="Max Content Length"
+          label="Paste Json here"
+          type="textarea"
         />
       </q-form>
       <q-card-actions align="right" class="card-action">
@@ -50,7 +28,7 @@
           color="accent"
           type="submit"
           label="Create"
-          @click="sendAPIRoot"
+          @click="sendObject"
           v-close-popup
         />
       </q-card-actions>
@@ -60,13 +38,10 @@
 
 <script>
 import { useDialogPluginComponent, Notify } from "quasar";
-import formService from "../../services/form.service";
+import Service from "../../services/rest.service";
 import { ref } from "vue";
 export default {
-  props: {
-    // ...your custom props
-  },
-
+  props: ["apiRoot", "collection"],
   emits: [
     // REQUIRED; need to specify some events that your
     // component will emit through useDialogPluginComponent()
@@ -74,20 +49,17 @@ export default {
   ],
   data() {
     return {
-      apr: {
-        name: "",
-        title: "",
-        description: "",
-        max_content_length: null,
+      object: {
+        json: "",
       },
     };
   },
   methods: {
-    sendAPIRoot() {
-      let body = `name=${this.apr.name}&title=${this.apr.title}&description=${this.apr.description}&max_content_length=${this.apr.max_content_length}`;
-      console.log(body);
-      formService
-        .post("/server/apiroots/", body)
+    sendObject() {
+      Service.post(
+        `/server/apiroots/${this.apiRoot.name}/${this.collection.id}`,
+        this.object.json
+      )
         .then((res) => {
           console.log(res);
           Notify.create({

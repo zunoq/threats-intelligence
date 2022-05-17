@@ -10,38 +10,26 @@
     v-close-popup
   >
     <q-card class="q-dialog-plugin q-pa-lg text-tertinary card" dark flat>
-      
-      <q-form @submit.prevent="sendAPIRoot" class="q-gutter-md">
-        <q-input
-          v-model="apr.name"
-          label="Name"
-          type="text"
-          dark
-          color="accent"
-        />
-        <q-input
-          v-model="apr.title"
-          autogrow
-          type="text"
-          dark
-          color="accent"
-          label="Title"
-        />
-        <q-input
-          v-model="apr.description"
-          autogrow
-          type="text"
-          dark
-          color="accent"
-          label="Description"
-        />
-        <q-input
-          v-model.number="apr.max_content_length"
-          type="number"
-          dark
-          color="accent"
-          label="Max Content Length"
-        />
+      <div class="text-h6 text-accent">Create new Collection</div>
+      <q-form @submit.prevent="sendCollection" class="q-gutter-md">
+        <div class="q-my-lg">
+          <q-input
+            v-model="collection.title"
+            autogrow
+            type="text"
+            dark
+            color="accent"
+            label="Title"
+          />
+        </div>
+        <div class="q-mt-md">
+          <div class="text">Can read</div>
+          <q-toggle v-model="collection.can_read" color="accent" size="xl" />
+        </div>
+        <div class="q-mt-md">
+          <div class="text">Can write</div>
+          <q-toggle v-model="collection.can_write" color="accent" size="xl" />
+        </div>
       </q-form>
       <q-card-actions align="right" class="card-action">
         <q-btn flat color="secondary" label="Cancel" @click="onCancelClick" />
@@ -50,7 +38,7 @@
           color="accent"
           type="submit"
           label="Create"
-          @click="sendAPIRoot"
+          @click="sendCollection"
           v-close-popup
         />
       </q-card-actions>
@@ -63,9 +51,7 @@ import { useDialogPluginComponent, Notify } from "quasar";
 import formService from "../../services/form.service";
 import { ref } from "vue";
 export default {
-  props: {
-    // ...your custom props
-  },
+  props: ["data"],
 
   emits: [
     // REQUIRED; need to specify some events that your
@@ -74,24 +60,24 @@ export default {
   ],
   data() {
     return {
-      apr: {
-        name: "",
+      apiRoot: this.data,
+      collection: {
         title: "",
-        description: "",
-        max_content_length: null,
+        can_read: true,
+        can_write: true,
       },
     };
   },
   methods: {
-    sendAPIRoot() {
-      let body = `name=${this.apr.name}&title=${this.apr.title}&description=${this.apr.description}&max_content_length=${this.apr.max_content_length}`;
-      console.log(body);
+    sendCollection() {
+      let body = `title=${this.collection.title}&can_read=${this.collection.can_read}&can_write=${this.collection.can_write}`;
+      console.log(this.apiRoot);
       formService
-        .post("/server/apiroots/", body)
+        .post(`/server/apiroots/${this.apiRoot.name}/`, body)
         .then((res) => {
           console.log(res);
           Notify.create({
-            message: "Tạo API Root thành công",
+            message: "Tạo Collection thành công",
             color: "green",
             position: "top",
           });
@@ -146,6 +132,10 @@ export default {
     position: absolute;
     bottom: 10px;
     right: 10px;
+  }
+  .text {
+    font-size: 16px;
+    color: rgba(#fff, $alpha: 0.7);
   }
 }
 </style>

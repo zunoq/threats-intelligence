@@ -68,7 +68,7 @@ class RESTService {
     try {
       var response = await api.post(link, body, { headers: authHeader() });
       if (thisComponent) {
-        thisComponent.$q.notify({
+        Notify.create({
           message: "Thành công",
           color: "green",
           position: "top"
@@ -79,16 +79,102 @@ class RESTService {
       if (error.status) {
         if (error.response.status == 403) UserService.logout();
         else if (thisComponent) {
-          thisComponent.$q.notify({
+          Notify.create({
             message: "Lỗi xác thực",
             color: "red",
-            position: "top"
+            position: "top",
           });
         }
       }
     }
   }
 
+  async delete(link, thisComponent = undefined) {
+    try {
+      var response = await api.delete(link, { headers: authHeader() });
+      if (thisComponent) {
+        Notify.create({
+          message: "Thành công",
+          color: "green",
+          position: "top",
+        });
+      }
+      return response.data;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 401) {
+          Notify.create({
+            message: "Chưa đang nhập vào hệ thống",
+            color: "red",
+            position: "top",
+          });
+          if (token) {
+            UserService.logout(token.refresh_token);
+          } else {
+            UserService.logout();
+            window.location.href = "/login";
+          }
+        } else {
+          if (error.response.status == 403) {
+            Notify.create({
+              message: "Không có quyền thực thi",
+              color: "red",
+              position: "top",
+            });
+          } else {
+            if (error.response.status >= 500) {
+              Notify.create({
+                message: "Lỗi hệ thống",
+                color: "red",
+                position: "top",
+              });
+              window.location.href = "/system-error";
+            } else {
+              if (error.response.status == 404) {
+                Notify.create({
+                  message: "Lỗi không tìm thấy trang",
+                  color: "red",
+                  position: "top",
+                });
+                window.location.href = "/notfound";
+              } else {
+                Notify.create({
+                  message: error.response.data.message,
+                  color: "red",
+                  position: "top",
+                });
+              }
+            }
+          }
+        }
+      } else {
+        if (error) {
+          if (error.message === "Network Error") {
+            Notify.create({
+              message: error.message,
+              color: "red",
+              position: "top",
+            });
+            window.location.href = "/network-error";
+          } else {
+            Notify.create({
+              message: error.message,
+              color: "red",
+              position: "top",
+            });
+            window.location.href = "/system-error";
+          }
+        } else {
+          if (token) {
+            UserService.logout(token.refresh_token);
+          } else {
+            UserService.logout();
+            window.location.href = "/login";
+          }
+        }
+      }
+    }
+  }
 }
 
 export default new RESTService();

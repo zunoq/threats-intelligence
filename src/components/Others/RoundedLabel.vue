@@ -1,6 +1,6 @@
 <template lang="">
   <div
-    class="label-container text-center"
+    class="label-container text-center q-ma-xs"
     :class="`text-` + `${handleLabel(string, label)}`"
   >
     <div

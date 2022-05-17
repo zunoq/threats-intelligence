@@ -65,7 +65,11 @@
       </q-card-section>
       <q-card-section class="col-6">
         <div class="text-caption q-mb-sm text-secondary">Labels</div>
-        <div class="labels" v-for="(label, idx) in infor.labels" :key="idx">
+        <div
+          class="labels q-ma-xs"
+          v-for="(label, idx) in infor.labels"
+          :key="idx"
+        >
           <div
             class="label-container text-center"
             :class="`text-` + `${handleLabel('', label)}`"
@@ -144,6 +148,7 @@ export default defineComponent({
   }
 }
 .labels {
+  display: inline-block;
   .label-container {
     display: inline-block;
     position: relative;
