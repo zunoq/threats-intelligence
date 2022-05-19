@@ -5,7 +5,7 @@
         v-for="apiRoot in apiRoots"
         :data="apiRoot"
         :key="apiRoot.name"
-        @update-list="updateList"
+        @deleteAPR="deleteAPIRoot"
       />
     </div>
     <div v-else flex flex-center>
@@ -25,35 +25,53 @@
 
 <script>
 import { defineComponent, ref } from "vue";
-import { useQuasar } from "quasar";
+import { useQuasar, Notify } from "quasar";
 import ApiRootCard from "../components/data/APIRootCard.vue";
 import AddAPIRoot from "../components/dialogs/AddAPIRoot.vue";
 import restService from "../services/rest.service.js";
+import formService from "../services/form.service";
+
 export default defineComponent({
   name: "ThreatsPage",
   components: { ApiRootCard },
   data() {
     return {
       apiRoots: [],
-      newApiRoots: "",
-      update: false,
     };
   },
   setup() {},
   methods: {
-    updateList(e) {
-      this.apiRoots.push(e);
-      console.log(e);
+    async deleteAPIRoot(e) {
+      await restService.delete(e);
+      this.getAPIRoot();
     },
     addAPI() {
-      this.$q.dialog({
-        component: AddAPIRoot,
-        emits: [
-          // REQUIRED; need to specify some events that your
-          // component will emit through useDialogPluginComponent()
-          ...useDialogPluginComponent.emits,
-        ],
-      });
+      this.$q
+        .dialog({
+          component: AddAPIRoot,
+        })
+        .onOk((e) => {
+          formService
+            .post("/server/apiroots/", e)
+            .then((res) => {
+              console.log(res);
+              Notify.create({
+                message: "Tạo API Root thành công",
+                color: "green",
+                position: "top",
+              });
+            })
+            .then(() => this.getAPIRoot())
+            .catch((err) => {
+              console.log(err);
+            });
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("Called on OK or Cancel");
+        });
     },
     async getAPIRoot() {
       let res = await restService.get("/server/apiroots/");

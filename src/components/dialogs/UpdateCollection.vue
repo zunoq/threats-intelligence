@@ -74,22 +74,7 @@ export default {
   methods: {
     updateCollection() {
       let body = `collection_id=${this.collection.collection_id}&title=${this.collection.title}&can_read=${this.collection.can_read}&can_write=${this.collection.can_write}`;
-      console.log(body);
-      formService
-        .put(`/server/apiroots/${this.apiRoot.name}/`, body)
-        .then((res) => {
-          console.log(res);
-          Notify.create({
-            message: "Tạo Collection thành công",
-            color: "green",
-            position: "top",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-      let update = formService.get(`/server/apiroots/${this.apiRoot.name}/`);
-      this.$emit("updateCollection", update);
+      this.$emit("ok", body);
     },
   },
 

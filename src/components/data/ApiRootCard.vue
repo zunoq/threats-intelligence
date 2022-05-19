@@ -71,8 +71,9 @@ export default defineComponent({
       this.$router.push("/threats/" + this.apiRoot.name);
     },
     deleteAPIRoot() {
-      Service.delete(`/server/apiroots/${this.apiRoot.name}`);
-      this.$emit("delete", true);
+      // Service.delete(`/server/apiroots/${this.apiRoot.name}`);
+      let url = `/server/apiroots/${this.apiRoot.name}`;
+      this.$emit("deleteAPR", url);
     },
     updateAPIRoot() {
       this.$q
@@ -82,9 +83,7 @@ export default defineComponent({
             data: this.apiRoot,
           },
         })
-        .onOk(() => {
-          this.update = true;
-        })
+        .onOk(() => {})
         .onCancel(() => {
           console.log("Cancel");
         })

@@ -85,21 +85,7 @@ export default {
   methods: {
     sendAPIRoot() {
       let body = `name=${this.apr.name}&title=${this.apr.title}&description=${this.apr.description}&max_content_length=${this.apr.max_content_length}`;
-      console.log(body);
-      this.$emit("apiRoot", body);
-      formService
-        .post("/server/apiroots/", body)
-        .then((res) => {
-          console.log(res);
-          Notify.create({
-            message: "Tạo API Root thành công",
-            color: "green",
-            position: "top",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$emit("ok", body);
     },
   },
 
@@ -124,6 +110,7 @@ export default {
       // other methods that we used in our vue html template;
       // these are part of our example (so not required)
       onOKClick() {
+        // this.sendAPIRoot();
         // on OK, it is REQUIRED to
         // call onDialogOK (with optional payload)
         onDialogOK();

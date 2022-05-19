@@ -41,7 +41,7 @@ import { useDialogPluginComponent, Notify } from "quasar";
 import Service from "../../services/rest.service";
 import { ref } from "vue";
 export default {
-  props: ["apiRoot", "collection"],
+  props: [],
   emits: [
     // REQUIRED; need to specify some events that your
     // component will emit through useDialogPluginComponent()
@@ -56,21 +56,8 @@ export default {
   },
   methods: {
     sendObject() {
-      Service.post(
-        `/server/apiroots/${this.apiRoot.name}/${this.collection.id}`,
-        this.object.json
-      )
-        .then((res) => {
-          console.log(res);
-          Notify.create({
-            message: "Tạo API Root thành công",
-            color: "green",
-            position: "top",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      let body = `${this.object.json}`;
+      this.$emit("ok", body);
     },
   },
 

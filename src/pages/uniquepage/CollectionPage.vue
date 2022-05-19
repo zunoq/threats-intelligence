@@ -72,6 +72,7 @@
 import { defineComponent } from "vue";
 import { date, Notify, useQuasar } from "quasar";
 import Service from "../../services/rest.service";
+import formService from "../../services/form.service";
 import AddObject from "../../components/dialogs/AddObject.vue";
 import ObjectTable from "../../components/data/-ObjectTable.vue";
 import RoundedLabel from "../../components/Others/RoundedLabel.vue";
@@ -167,13 +168,27 @@ export default defineComponent({
       this.$q
         .dialog({
           component: AddObject,
-          componentProps: {
-            apiRoot: this.apiRoot,
-            collection: this.collection,
-          },
+          componentProps: {},
         })
-        .onOk(() => {
-          this.update = true;
+        .onOk((e) => {
+          console.log(e);
+          formService
+            .post(
+              `/server/apiroots/${this.apiRoot.name}/${this.collection.id}`,
+              e
+            )
+            .then((res) => {
+              console.log(res);
+              Notify.create({
+                message: "Tạo Object thành công",
+                color: "green",
+                position: "top",
+              });
+            })
+            .then(() => this.getObjects())
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .onCancel(() => {
           console.log("Cancel");

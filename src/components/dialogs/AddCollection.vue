@@ -71,20 +71,7 @@ export default {
   methods: {
     sendCollection() {
       let body = `title=${this.collection.title}&can_read=${this.collection.can_read}&can_write=${this.collection.can_write}`;
-      console.log(this.apiRoot);
-      formService
-        .post(`/server/apiroots/${this.apiRoot.name}/`, body)
-        .then((res) => {
-          console.log(res);
-          Notify.create({
-            message: "Tạo Collection thành công",
-            color: "green",
-            position: "top",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$emit("ok", body);
     },
   },
 

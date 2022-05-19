@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { useQuasar } from "quasar";
+import { useQuasar, Notify } from "quasar";
 import { defineComponent } from "vue";
 import AddCollection from "../../components/dialogs/AddCollection.vue";
 import restService from "../../services/rest.service";
@@ -159,11 +159,21 @@ export default defineComponent({
             cl: collection,
           },
         })
-        .onOk(() => {
-          let updated = formService.get(
-            `/server/apiroots/${this.apiRoot.name}/`
-          );
-          this.collections = updated;
+        .onOk((e) => {
+          formService
+            .put(`/server/apiroots/${this.apiRoot.name}/`, e)
+            .then((res) => {
+              console.log(res);
+              Notify.create({
+                message: "Tạo Collection thành công",
+                color: "green",
+                position: "top",
+              });
+            })
+            .then(() => this.getCollection())
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .onCancel(() => {
           console.log("Cancel");
@@ -181,8 +191,21 @@ export default defineComponent({
             data: this.apiRoot,
           },
         })
-        .onOk(() => {
-          console.log("object");
+        .onOk((e) => {
+          formService
+            .post(`/server/apiroots/${this.apiRoot.name}/`, e)
+            .then((res) => {
+              console.log(res);
+              Notify.create({
+                message: "Tạo Collection thành công",
+                color: "green",
+                position: "top",
+              });
+            })
+            .then(() => this.getCollection())
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .onCancel(() => {})
         .onDismiss(() => {});
