@@ -172,11 +172,10 @@ export default defineComponent({
         })
         .onOk((e) => {
           console.log(e);
-          formService
-            .post(
-              `/server/apiroots/${this.apiRoot.name}/${this.collection.id}`,
-              e
-            )
+          Service.post(
+            `/server/apiroots/${this.apiRoot.name}/${this.collection.id}`,
+            e
+          )
             .then((res) => {
               console.log(res);
               Notify.create({
