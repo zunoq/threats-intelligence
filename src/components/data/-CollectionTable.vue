@@ -31,7 +31,14 @@
             <BlurBgSquareLabel :data="props.row.can_write" str="" />
           </q-td>
           <q-td key="action" :props="props" auto-width>
-            <q-btn flat round icon="brush" color="secondary" class="q-mr-md">
+            <q-btn
+              flat
+              round
+              icon="brush"
+              color="secondary"
+              @click.stop="updateCollection(props.row)"
+              class="q-mr-md"
+            >
               <q-tooltip> Edit this Collection </q-tooltip>
             </q-btn>
             <q-btn
@@ -53,6 +60,7 @@
 import { defineComponent } from "vue";
 import { date, Notify, useQuasar } from "quasar";
 import Service from "../../services/rest.service";
+import UpdateCollection from "../dialogs/UpdateCollection.vue";
 import BlurBgSquareLabel from "../Others/BlurBgSquareLabel.vue";
 const columns = [
   {
@@ -111,12 +119,33 @@ export default defineComponent({
   },
   methods: {
     onRowClick(row) {
-      console.log("clicked on", row);
       this.$q.localStorage.set("collection", row);
       this.$router.push("/threats/" + this.apiRoot.name + "/" + row.id);
     },
     deleteCollection(row) {
       Service.delete(`/server/apiroots/${this.apiRoot.name}/${row.id}`);
+    },
+    updateCollection(collection) {
+      this.$q
+        .dialog({
+          component: UpdateCollection,
+          componentProps: {
+            data: this.apiRoot,
+            cl: collection,
+          },
+        })
+        .onOk(() => {
+          let updated = formService.get(
+            `/server/apiroots/${this.apiRoot.name}/`
+          );
+          this.collections = updated;
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("Called on OK or Cancel");
+        });
     },
   },
   setup() {
@@ -149,9 +178,6 @@ export default defineComponent({
         this.rows = [...data];
       },
     },
-  },
-  updated() {
-    console.log(this.data);
   },
 });
 </script>

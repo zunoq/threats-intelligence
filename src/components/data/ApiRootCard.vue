@@ -25,8 +25,8 @@
               <q-btn round flat @click.stop="show = true" icon="more_vert">
                 <q-menu fit auto-close square flat>
                   <q-list class="bg-primary">
-                    <q-item clickable dark>
-                      <q-item-section>Edit</q-item-section>
+                    <q-item clickable dark @click.stop="updateAPIRoot">
+                      <q-item-section>Update</q-item-section>
                     </q-item>
                     <q-item clickable dark @click.stop="deleteAPIRoot">
                       <q-item-section>Remove</q-item-section>
@@ -50,6 +50,7 @@
 <script>
 import { defineComponent } from "vue";
 import { date, Notify, LocalStorage } from "quasar";
+import UpdateAPIRoot from "../dialogs/UpdateAPIRoot.vue";
 import Service from "../../services/rest.service";
 
 export default defineComponent({
@@ -71,6 +72,25 @@ export default defineComponent({
     },
     deleteAPIRoot() {
       Service.delete(`/server/apiroots/${this.apiRoot.name}`);
+      this.$emit("delete", true);
+    },
+    updateAPIRoot() {
+      this.$q
+        .dialog({
+          component: UpdateAPIRoot,
+          componentProps: {
+            data: this.apiRoot,
+          },
+        })
+        .onOk(() => {
+          this.update = true;
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("Called on OK or Cancel");
+        });
     },
   },
   computed: {

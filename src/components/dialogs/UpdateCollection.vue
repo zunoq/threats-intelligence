@@ -10,38 +10,26 @@
     v-close-popup
   >
     <q-card class="q-dialog-plugin q-pa-lg text-tertinary card" dark flat>
-      
-      <q-form @submit.prevent="sendAPIRoot" class="q-gutter-md">
-        <q-input
-          v-model="apr.name"
-          label="Name"
-          type="text"
-          dark
-          color="accent"
-        />
-        <q-input
-          v-model="apr.title"
-          autogrow
-          type="text"
-          dark
-          color="accent"
-          label="Title"
-        />
-        <q-input
-          v-model="apr.description"
-          autogrow
-          type="text"
-          dark
-          color="accent"
-          label="Description"
-        />
-        <q-input
-          v-model.number="apr.max_content_length"
-          type="number"
-          dark
-          color="accent"
-          label="Max Content Length"
-        />
+      <div class="text-h6 text-accent">Update Collection</div>
+      <q-form @submit.prevent="updateCollection" class="q-gutter-md">
+        <div class="q-my-lg">
+          <q-input
+            v-model="collection.title"
+            autogrow
+            type="text"
+            dark
+            color="accent"
+            label="Title"
+          />
+        </div>
+        <div class="q-mt-md">
+          <div class="text">Can read</div>
+          <q-toggle v-model="collection.can_read" color="accent" size="xl" />
+        </div>
+        <div class="q-mt-md">
+          <div class="text">Can write</div>
+          <q-toggle v-model="collection.can_write" color="accent" size="xl" />
+        </div>
       </q-form>
       <q-card-actions align="right" class="card-action">
         <q-btn flat color="secondary" label="Cancel" @click="onCancelClick" />
@@ -49,8 +37,8 @@
           flat
           color="accent"
           type="submit"
-          label="Create"
-          @click="sendAPIRoot"
+          label="Update"
+          @click="updateCollection"
           v-close-popup
         />
       </q-card-actions>
@@ -61,37 +49,38 @@
 <script>
 import { useDialogPluginComponent, Notify } from "quasar";
 import formService from "../../services/form.service";
+import restService from "../../services/rest.service";
 import { ref } from "vue";
 export default {
-  props: {
-    // ...your custom props
-  },
+  props: ["data", "cl"],
 
   emits: [
     // REQUIRED; need to specify some events that your
     // component will emit through useDialogPluginComponent()
     ...useDialogPluginComponent.emits,
+    "updatedCollection",
   ],
   data() {
     return {
-      apr: {
-        name: "",
-        title: "",
-        description: "",
-        max_content_length: null,
+      apiRoot: this.data,
+      collection: {
+        collection_id: this.cl.id,
+        title: this.cl.title,
+        can_read: this.cl.can_read,
+        can_write: this.cl.can_write,
       },
     };
   },
   methods: {
-    sendAPIRoot() {
-      let body = `name=${this.apr.name}&title=${this.apr.title}&description=${this.apr.description}&max_content_length=${this.apr.max_content_length}`;
+    updateCollection() {
+      let body = `collection_id=${this.collection.collection_id}&title=${this.collection.title}&can_read=${this.collection.can_read}&can_write=${this.collection.can_write}`;
       console.log(body);
       formService
-        .post("/server/apiroots/", body)
+        .put(`/server/apiroots/${this.apiRoot.name}/`, body)
         .then((res) => {
           console.log(res);
           Notify.create({
-            message: "Tạo API Root thành công",
+            message: "Tạo Collection thành công",
             color: "green",
             position: "top",
           });
@@ -99,6 +88,8 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+      let update = formService.get(`/server/apiroots/${this.apiRoot.name}/`);
+      this.$emit("updateCollection", update);
     },
   },
 
@@ -146,6 +137,10 @@ export default {
     position: absolute;
     bottom: 10px;
     right: 10px;
+  }
+  .text {
+    font-size: 16px;
+    color: rgba(#fff, $alpha: 0.7);
   }
 }
 </style>

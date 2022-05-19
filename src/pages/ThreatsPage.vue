@@ -5,6 +5,7 @@
         v-for="apiRoot in apiRoots"
         :data="apiRoot"
         :key="apiRoot.name"
+        @update-list="updateList"
       />
     </div>
     <div v-else flex flex-center>
@@ -26,7 +27,7 @@
 import { defineComponent, ref } from "vue";
 import { useQuasar } from "quasar";
 import ApiRootCard from "../components/data/APIRootCard.vue";
-import AddAPIRoot from "../components/plugins/AddAPIRoot.vue";
+import AddAPIRoot from "../components/dialogs/AddAPIRoot.vue";
 import restService from "../services/rest.service.js";
 export default defineComponent({
   name: "ThreatsPage",
@@ -34,25 +35,25 @@ export default defineComponent({
   data() {
     return {
       apiRoots: [],
+      newApiRoots: "",
       update: false,
     };
   },
   setup() {},
   methods: {
+    updateList(e) {
+      this.apiRoots.push(e);
+      console.log(e);
+    },
     addAPI() {
-      this.$q
-        .dialog({
-          component: AddAPIRoot,
-        })
-        .onOk(() => {
-          this.update = true;
-        })
-        .onCancel(() => {
-          console.log("Cancel");
-        })
-        .onDismiss(() => {
-          console.log("Called on OK or Cancel");
-        });
+      this.$q.dialog({
+        component: AddAPIRoot,
+        emits: [
+          // REQUIRED; need to specify some events that your
+          // component will emit through useDialogPluginComponent()
+          ...useDialogPluginComponent.emits,
+        ],
+      });
     },
     async getAPIRoot() {
       let res = await restService.get("/server/apiroots/");

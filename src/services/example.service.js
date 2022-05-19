@@ -1,64 +1,114 @@
-import { axios, api } from "boot/axios";
+import { api } from "boot/axios";
 import UserService from "./user.service";
-import { Notify, LocalStorage } from "quasar"
+import { LocalStorage, Notify } from "quasar";
+
 function authHeader() {
   var token = LocalStorage.getItem("token");
-
   if (token) {
     return {
       Authorization: "Bearer " + token.access_token,
-      "Content-Type": "application/x-www-form-urlencoded"
+      "Content-Type": "application/json",
     };
   } else {
-    return {
-
-    };
+    return {};
   }
 }
+const token = LocalStorage.getItem("token");
 
 class RESTService {
   async get(link, params = {}, thisComponent = undefined) {
     try {
-      if (Object.keys(params).length > 0) {
+      if (Object.keys(params).length > 0)
         var response = await api.get(link, { params, headers: authHeader() });
-
-      }
-      else {
-        var response = await api.get(link, { headers: authHeader() });
-      }
+      else var response = await api.get(link, { headers: authHeader() });
       if (thisComponent) {
         Notify.create({
           message: "Thành công",
           color: "green",
-          position: "top"
+          position: "top",
         });
       }
       return response.data;
     } catch (error) {
-      if (error.status) {
-        if (error.response.status == 401) UserService.logout();
-        else if (thisComponent) {
+      if (error.response) {
+        if (error.response.status == 401) {
           Notify.create({
-            message: "Lỗi xác thực",
+            message: "Chưa đang nhập vào hệ thống",
             color: "red",
-            position: "top"
+            position: "top",
           });
+          if (token) {
+            UserService.logout(token.refresh_token);
+          } else {
+            UserService.logout();
+            window.location.href = "/login";
+          }
+        } else {
+          if (error.response.status == 403) {
+            Notify.create({
+              message: "Không có quyền thực thi",
+              color: "red",
+              position: "top",
+            });
+          } else {
+            if (error.response.status >= 500) {
+              Notify.create({
+                message: "Lỗi hệ thống",
+                color: "red",
+                position: "top",
+              });
+              window.location.href = "/system-error";
+            } else {
+              if (error.response.status == 404) {
+                Notify.create({
+                  message: "Lỗi không tìm thấy trang",
+                  color: "red",
+                  position: "top",
+                });
+                window.location.href = "/notfound";
+              } else {
+                if (error.response.status == 423) {
+                  Notify.create({
+                    message: "Biểu mẫu đã ngừng hoạt động",
+                    color: "red",
+                    position: "top",
+                  });
+                  return error.response.data;
+                } else {
+                  Notify.create({
+                    message: error.response.data.message,
+                    color: "red",
+                    position: "top",
+                  });
+                }
+              }
+            }
+          }
         }
-      }
-      else {
-        if (error.message) {
-          Notify.create({
-            message: error.message,
-            color: "red",
-            position: "top"
-          });
-        }
-        else {
-          Notify.create({
-            message: error.message,
-            color: "red",
-            position: "top"
-          });
+      } else {
+        if (error) {
+          if (error.message === "Network Error") {
+            Notify.create({
+              message: error.message,
+              color: "red",
+              position: "top",
+            });
+            window.location.href = "/network-error";
+          } else {
+            Notify.create({
+              message: error.message,
+              color: "red",
+              position: "top",
+            });
+            window.location.href = "/system-error";
+          }
+        } else {
+          if (token) {
+            UserService.logout(token.refresh_token);
+          } else {
+            UserService.logout();
+            window.location.href = "/login";
+          }
         }
       }
     }
@@ -68,26 +118,97 @@ class RESTService {
     try {
       var response = await api.post(link, body, { headers: authHeader() });
       if (thisComponent) {
-        thisComponent.$q.notify({
+        Notify.create({
           message: "Thành công",
           color: "green",
-          position: "top"
+          position: "top",
         });
       }
       return response.data;
     } catch (error) {
-      if (error.status) {
-        if (error.response.status == 403) UserService.logout();
-        else if (thisComponent) {
-          thisComponent.$q.notify({
-            message: "Lỗi xác thực",
+      if (error.response) {
+        if (error.response.status == 401) {
+          Notify.create({
+            message: "Chưa đang nhập vào hệ thống",
             color: "red",
-            position: "top"
+            position: "top",
           });
+          if (token) {
+            UserService.logout(token.refresh_token);
+          } else {
+            UserService.logout();
+            window.location.href = "/login";
+          }
+        } else {
+          if (error.response.status == 403) {
+            Notify.create({
+              message: "Không có quyền thực thi",
+              color: "red",
+              position: "top",
+            });
+          } else {
+            if (error.response.status >= 500) {
+              Notify.create({
+                message: "Lỗi hệ thống",
+                color: "red",
+                position: "top",
+              });
+              window.location.href = "/system-error";
+            } else {
+              if (error.response.status == 404) {
+                Notify.create({
+                  message: "Lỗi không tìm thấy trang",
+                  color: "red",
+                  position: "top",
+                });
+                window.location.href = "/notfound";
+              } else {
+                if (error.response.status == 406) {
+                  Notify.create({
+                    message: "Đã gửi quá số lần cho phép",
+                    color: "red",
+                    position: "top",
+                  });
+                } else {
+                  Notify.create({
+                    message: error.response.data.message,
+                    color: "red",
+                    position: "top",
+                  });
+                }
+              }
+            }
+          }
+        }
+      } else {
+        if (error) {
+          if (error.message === "Network Error") {
+            Notify.create({
+              message: error.message,
+              color: "red",
+              position: "top",
+            });
+            window.location.href = "/network-error";
+          } else {
+            Notify.create({
+              message: error.message,
+              color: "red",
+              position: "top",
+            });
+            window.location.href = "/system-error";
+          }
+        } else {
+          if (token) {
+            UserService.logout(token.refresh_token);
+          } else {
+            UserService.logout();
+            window.location.href = "/login";
+          }
         }
       }
     }
   }
+
   async put(link, body, thisComponent = undefined) {
     try {
       var response = await api.put(link, body, { headers: authHeader() });
@@ -260,7 +381,6 @@ class RESTService {
       }
     }
   }
-
 }
 
 export default new RESTService();

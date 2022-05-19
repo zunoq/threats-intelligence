@@ -3,8 +3,8 @@
     <q-table
       dark
       flat
-      :title="`${apiRoot.name}` + `${collection.title}` + ' Object'"
-      title-class="text-uppercase text-accent"
+      :title="`${collection.title}'s` + ' Object'"
+      title-class=" text-accent"
       :rows="rows"
       :columns="columns"
       row-key="name"
@@ -137,7 +137,9 @@ export default defineComponent({
       );
     },
     deleteObject(row) {
-      Service.delete(`/server/apiroots/${this.apiRoot.name}/${this.collection.id}/${row.id}`);
+      Service.delete(
+        `/server/apiroots/${this.apiRoot.name}/${this.collection.id}/${row.id}`
+      );
     },
   },
   setup() {
