@@ -165,7 +165,6 @@ export default defineComponent({
       this.$router.push("/threats/" + this.apiRoot.name + "/" + row.id);
     },
     async deleteCollection(row) {
-      console.log(row.title);
       await restService.delete(
         `/server/apiroots/${this.apiRoot.name}/${row.id}`
       );
@@ -183,7 +182,6 @@ export default defineComponent({
           formService
             .put(`/server/apiroots/${this.apiRoot.name}/`, e)
             .then((res) => {
-              console.log(res);
               Notify.create({
                 message: "Sửa Collection thành công",
                 color: "green",
@@ -215,7 +213,6 @@ export default defineComponent({
           formService
             .post(`/server/apiroots/${this.apiRoot.name}/`, e)
             .then((res) => {
-              console.log(res);
               Notify.create({
                 message: "Tạo Collection thành công",
                 color: "green",

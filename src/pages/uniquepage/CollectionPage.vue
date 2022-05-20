@@ -147,7 +147,6 @@ export default defineComponent({
   },
   methods: {
     onRowClick(row) {
-      console.log("clicked on", row);
       this.$q.localStorage.set("object", row);
       this.$router.push(
         "/threats/" +
@@ -171,13 +170,11 @@ export default defineComponent({
           componentProps: {},
         })
         .onOk((e) => {
-          console.log(e);
           Service.post(
             `/server/apiroots/${this.apiRoot.name}/${this.collection.id}`,
             e
           )
             .then((res) => {
-              console.log(res);
               Notify.create({
                 message: "Tạo Object thành công",
                 color: "green",

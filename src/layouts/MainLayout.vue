@@ -3,7 +3,9 @@
     <q-header class="bg-layout" flat dark elevated>
       <q-toolbar>
         <div class="large-screen-only" @click="drawer = !drawer">
-          <img height="64" src="../assets/logo_bg.png" alt="" />
+          <div class="text-h5 text-uppercase text-secondary">
+            Threat Intelligence
+          </div>
         </div>
         <q-space />
 
@@ -151,7 +153,7 @@
         </q-list>
         <q-separator dark dense />
         <q-list>
-          <q-expansion-item icon="storage" label="Thực thể">
+          <q-expansion-item icon="emoji_objects" label="Thực thể">
             <q-item
               clickable
               v-ripple
@@ -196,7 +198,7 @@
           </q-expansion-item>
           <q-item clickable active-class="active-page" v-ripple to="/threats">
             <q-item-section avatar>
-              <q-icon name="settings" />
+              <q-icon name="analytics" />
             </q-item-section>
 
             <q-item-section> Dữ liệu </q-item-section>
@@ -237,7 +239,6 @@ export default {
       dialogRef,
       onDialogHide,
       onOKClick() {
-        console.log("object");
         onDialogOK();
         // or with payload: onDialogOK({ ... })
         // ...and it will also hide the dialog automatically

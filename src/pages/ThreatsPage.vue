@@ -47,11 +47,9 @@ export default defineComponent({
       this.getAPIRoot();
     },
     async updateAPIRoot(e) {
-      console.log(e);
       await formService
         .put("/server/apiroots/", e)
         .then((res) => {
-          console.log(res);
           Notify.create({
             message: "Sửa API Root thành công",
             color: "green",

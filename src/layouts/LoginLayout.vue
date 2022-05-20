@@ -84,7 +84,6 @@ export default {
         });
       } else {
         try {
-          console.log(this.login);
           userService.login(this.login).then(() => {
             if (localStorage.getItem("token")) {
               this.$router.push("/dashboard");

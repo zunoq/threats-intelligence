@@ -53,7 +53,6 @@ export default defineComponent({
     data: {
       handler(data) {
         this.manifest = Object.assign({}, data);
-        console.log(data);
       },
       deep: true,
     },

@@ -125,7 +125,6 @@ export default defineComponent({
   },
   methods: {
     onRowClick(row) {
-      console.log("clicked on", row);
       this.$q.localStorage.set("object", row);
       this.$router.push(
         "/threats/" +

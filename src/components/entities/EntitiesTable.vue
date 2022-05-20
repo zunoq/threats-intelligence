@@ -147,7 +147,6 @@ export default defineComponent({
   },
   methods: {
     onRowClick(row) {
-      console.log("clicked on", row);
       this.$q.localStorage.set("report", row);
       this.$router.push("/entities/reports/" + row.id);
     },
@@ -164,9 +163,6 @@ export default defineComponent({
         return str.length > n ? str.substr(0, n - 1) + "..." : str;
       };
     },
-  },
-  updated() {
-    console.log(this.selected.length);
   },
 });
 </script>
