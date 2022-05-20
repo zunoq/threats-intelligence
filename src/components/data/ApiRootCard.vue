@@ -83,7 +83,11 @@ export default defineComponent({
             data: this.apiRoot,
           },
         })
-        .onOk(() => {})
+        .onOk((e) => {
+          let update = e;
+          console.log(update);
+          this.$emit("updateAPR", update);
+        })
         .onCancel(() => {
           console.log("Cancel");
         })
@@ -111,6 +115,13 @@ export default defineComponent({
           return date.formatDate(new Date(timeStamp), "MMM DD, YYYY");
         }
       };
+    },
+  },
+  watch: {
+    data: {
+      handler(data) {
+        this.apiRoot = { ...data };
+      },
     },
   },
 });

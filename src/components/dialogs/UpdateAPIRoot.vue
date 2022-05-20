@@ -84,20 +84,7 @@ export default {
   methods: {
     updateAPIRoot() {
       let body = `name=${this.apr.name}&title=${this.apr.title}&description=${this.apr.description}&max_content_length=${this.apr.max_content_length}`;
-      console.log(body);
-      formService
-        .put("/server/apiroots/", body)
-        .then((res) => {
-          console.log(res);
-          Notify.create({
-            message: "Tạo API Root thành công",
-            color: "green",
-            position: "top",
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      this.$emit("ok", body);
     },
   },
 

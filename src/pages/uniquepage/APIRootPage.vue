@@ -27,10 +27,32 @@
                 {{ props.row.title }}
               </q-td>
               <q-td key="can_read" :props="props" auto-width>
-                <BlurBgSquareLabel :data="props.row.can_read" str="" />
+                <div class="label-container text-center text-uppercase">
+                  <div
+                    class="label-bg"
+                    :class="`bg-` + `${props.row.can_read}`"
+                  ></div>
+                  <div
+                    class="label-text"
+                    :class="`text-` + `${props.row.can_read}`"
+                  >
+                    {{ props.row.can_read }}
+                  </div>
+                </div>
               </q-td>
               <q-td key="can_write" :props="props" auto-width>
-                <BlurBgSquareLabel :data="props.row.can_write" str="" />
+                <div class="label-container text-center text-uppercase">
+                  <div
+                    class="label-bg"
+                    :class="`bg-` + `${props.row.can_write}`"
+                  ></div>
+                  <div
+                    class="label-text"
+                    :class="`text-` + `${props.row.can_write}`"
+                  >
+                    {{ props.row.can_write }}
+                  </div>
+                </div>
               </q-td>
               <q-td key="action" :props="props" auto-width>
                 <q-btn
@@ -76,7 +98,6 @@ import { defineComponent } from "vue";
 import AddCollection from "../../components/dialogs/AddCollection.vue";
 import restService from "../../services/rest.service";
 import formService from "../../services/form.service";
-import BlurBgSquareLabel from "../../components/Others/BlurBgSquareLabel.vue";
 import UpdateCollection from "../../components/dialogs/UpdateCollection.vue";
 const columns = [
   {
@@ -121,7 +142,7 @@ const columns = [
 ];
 export default defineComponent({
   name: "APIRootPage",
-  components: { BlurBgSquareLabel },
+  components: {},
   data() {
     return {
       collections: [],
@@ -155,7 +176,6 @@ export default defineComponent({
         .dialog({
           component: UpdateCollection,
           componentProps: {
-            data: this.apiRoot,
             cl: collection,
           },
         })
@@ -165,7 +185,7 @@ export default defineComponent({
             .then((res) => {
               console.log(res);
               Notify.create({
-                message: "Tạo Collection thành công",
+                message: "Sửa Collection thành công",
                 color: "green",
                 position: "top",
               });
@@ -245,5 +265,23 @@ export default defineComponent({
   position: fixed;
   right: 30px;
   bottom: 30px;
+}
+.label-container {
+  display: inline-block;
+  position: relative;
+  font-size: 12px;
+  padding: 4px 9px;
+  min-width: 85px;
+  // border: none;
+  .label-bg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.3;
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

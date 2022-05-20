@@ -6,6 +6,7 @@
         :data="apiRoot"
         :key="apiRoot.name"
         @deleteAPR="deleteAPIRoot"
+        @updateAPR="updateAPIRoot"
       />
     </div>
     <div v-else flex flex-center>
@@ -45,6 +46,23 @@ export default defineComponent({
       await restService.delete(e);
       this.getAPIRoot();
     },
+    async updateAPIRoot(e) {
+      console.log(e);
+      await formService
+        .put("/server/apiroots/", e)
+        .then((res) => {
+          console.log(res);
+          Notify.create({
+            message: "Sửa API Root thành công",
+            color: "green",
+            position: "top",
+          });
+        })
+        .then(() => this.getAPIRoot())
+        .catch((err) => {
+          console.log(err);
+        });
+    },
     addAPI() {
       this.$q
         .dialog({
@@ -54,7 +72,6 @@ export default defineComponent({
           formService
             .post("/server/apiroots/", e)
             .then((res) => {
-              console.log(res);
               Notify.create({
                 message: "Tạo API Root thành công",
                 color: "green",
