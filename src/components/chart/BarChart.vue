@@ -1,7 +1,7 @@
 <template>
   <div class="col-xs-12 col-md-12 col-lg-6">
     <div class="text-caption text-uppercase text-grey-4">
-      TOP 10 ACTIVE ENTITIES (3 LAST MONTHS)
+      TOP 10 thực thể hoạt động (3 tháng gần nhất)
     </div>
     <q-card dark flat bordered class="bg-primary light-font">
       <BarChart :chart-data="data" :options="options" />

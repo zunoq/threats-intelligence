@@ -1,8 +1,6 @@
 <template lang="">
   <div>
-    <div class="text-caption text-uppercase text-grey-4">
-      Manifest information
-    </div>
+    <div class="text-caption text-uppercase text-grey-4">Thông tin khác</div>
     <q-card class="row my-card bg-primary q-my-sm" dark flat>
       <q-card-section class="col-12">
         <div class="text-caption q-mb-sm text-secondary">Collection ID</div>
@@ -11,15 +9,15 @@
         </div>
       </q-card-section>
       <q-card-section class="col-6">
-        <div class="text-caption q-mb-sm text-secondary">Date added</div>
+        <div class="text-caption q-mb-sm text-secondary">Ngày tạo</div>
         <div class="text-body2">{{ dateconvert(manifest.date_added) }}</div>
       </q-card-section>
       <q-card-section class="col-6">
-        <div class="text-caption q-mb-sm text-secondary">Version</div>
+        <div class="text-caption q-mb-sm text-secondary">Phiên bản</div>
         <div class="text-body2">{{ manifest.version }}</div>
       </q-card-section>
       <q-card-section class="col-12">
-        <div class="text-caption q-mb-sm text-secondary">Media Type</div>
+        <div class="text-caption q-mb-sm text-secondary">Kiểu media</div>
         <div class="text-subtitle2 bg-tertiary id-area q-pa-sm">
           {{ manifest.media_type }}
         </div>

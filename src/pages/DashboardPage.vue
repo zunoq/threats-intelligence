@@ -38,25 +38,25 @@ export default defineComponent({
     return {
       reportsData: [
         {
-          name: "Total Entities",
+          name: "Tổng só thực thể",
           statistics: 12800,
           trend: -28,
           icon: "equalizer",
         },
         {
-          name: "Total Relationships",
+          name: "Tổng số Relationships",
           statistics: 1260000,
           trend: 32,
           icon: "account_tree",
         },
         {
-          name: "Total Reports",
+          name: "Tổng số báo cáo",
           statistics: 8890,
           trend: 5,
           icon: "description",
         },
         {
-          name: "Total Observables",
+          name: "Tổng số quan sát",
           statistics: 552760,
           trend: 16,
           icon: "remove_red_eye",

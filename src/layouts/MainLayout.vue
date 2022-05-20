@@ -28,15 +28,15 @@
           </template>
         </q-input>
         <q-btn flat round color="primary" icon="manage_search">
-          <q-tooltip> Advanced Search</q-tooltip>
+          <q-tooltip> Tìm kiếm nâng cao</q-tooltip>
         </q-btn>
         <div class="large-screen-only-navbar">
           <q-separator dark vertical inset spaced />
           <q-btn flat round color="primary" icon="dashboard_customize">
-            <q-tooltip> Customize Dashboard </q-tooltip>
+            <q-tooltip> Tuỳ chỉnh Dashboard </q-tooltip>
           </q-btn>
           <q-btn flat round color="primary" icon="explore">
-            <q-tooltip> Investigation </q-tooltip></q-btn
+            <q-tooltip> Điều tra </q-tooltip></q-btn
           >
           <q-btn flat round color="primary" icon="upload">
             <q-tooltip> Data Import </q-tooltip></q-btn
@@ -45,10 +45,10 @@
             <q-menu fit auto-close square flat>
               <q-list class="bg-primary">
                 <q-item clickable dark>
-                  <q-item-section>Profile</q-item-section>
+                  <q-item-section>Hồ sơ</q-item-section>
                 </q-item>
                 <q-item clickable dark @click="logout">
-                  <q-item-section>Logout</q-item-section>
+                  <q-item-section>Đăng xuất</q-item-section>
                 </q-item>
               </q-list>
             </q-menu>
@@ -73,9 +73,9 @@
               <q-icon name="dashboard" />
             </q-item-section>
 
-            <q-item-section> Dashboard </q-item-section>
+            <q-item-section> Trang chủ </q-item-section>
           </q-item>
-          <q-expansion-item icon="cookie" label="Activities">
+          <q-expansion-item icon="cookie" label="Hoạt động">
             <q-item
               clickable
               v-ripple
@@ -88,7 +88,7 @@
                 <q-icon name="assignment" />
               </q-item-section>
 
-              <q-item-section> Analysis </q-item-section>
+              <q-item-section> Phân tích </q-item-section>
             </q-item>
             <q-item
               clickable
@@ -102,7 +102,7 @@
                 <q-icon name="event" />
               </q-item-section>
 
-              <q-item-section> Events </q-item-section> </q-item
+              <q-item-section> Sự kiện </q-item-section> </q-item
             ><q-item
               clickable
               active-class="active-page"
@@ -115,10 +115,10 @@
                 <q-icon name="remove_red_eye" />
               </q-item-section>
 
-              <q-item-section> Observations </q-item-section>
+              <q-item-section> Quan sát </q-item-section>
             </q-item>
           </q-expansion-item>
-          <q-expansion-item icon="psychology" label="Knowledge">
+          <q-expansion-item icon="psychology" label="Kiến thức">
             <q-item
               clickable
               active-class="active-page"
@@ -131,7 +131,7 @@
                 <q-icon name="science" />
               </q-item-section>
 
-              <q-item-section> Threats </q-item-section>
+              <q-item-section> Các nguy cơ </q-item-section>
             </q-item>
             <q-item
               clickable
@@ -151,7 +151,7 @@
         </q-list>
         <q-separator dark dense />
         <q-list>
-          <q-expansion-item icon="storage" label="Data">
+          <q-expansion-item icon="storage" label="Thực thể">
             <q-item
               clickable
               v-ripple
@@ -164,7 +164,7 @@
                 <q-icon name="bug_report" />
               </q-item-section>
 
-              <q-item-section> Entities </q-item-section>
+              <q-item-section> Thực thể </q-item-section>
             </q-item>
             <q-item
               clickable
@@ -178,7 +178,7 @@
                 <q-icon name="splitscreen" />
               </q-item-section>
 
-              <q-item-section> Background Tasks </q-item-section> </q-item
+              <q-item-section> Tác vụ nền </q-item-section> </q-item
             ><q-item
               clickable
               active-class="active-page"
@@ -191,15 +191,22 @@
                 <q-icon name="sensors" />
               </q-item-section>
 
-              <q-item-section> Connectors </q-item-section>
+              <q-item-section> Kết nối </q-item-section>
             </q-item>
           </q-expansion-item>
+          <q-item clickable active-class="active-page" v-ripple to="/threats">
+            <q-item-section avatar>
+              <q-icon name="settings" />
+            </q-item-section>
+
+            <q-item-section> Dữ liệu </q-item-section>
+          </q-item>
           <q-item clickable active-class="active-page" v-ripple to="/settings">
             <q-item-section avatar>
               <q-icon name="settings" />
             </q-item-section>
 
-            <q-item-section> Settings </q-item-section>
+            <q-item-section> Cài đặt </q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>

@@ -81,7 +81,7 @@ const columns = [
   {
     name: "type",
     required: true,
-    label: "type",
+    label: "Phân loại",
     align: "left",
     field: (row) => row.type,
     sortable: true,
@@ -97,7 +97,7 @@ const columns = [
   {
     name: "name",
     required: true,
-    label: "Name",
+    label: "Tên",
     align: "left",
     field: (row) => row.name,
     sortable: true,
@@ -105,7 +105,7 @@ const columns = [
   {
     name: "labels",
     required: true,
-    label: "Labels",
+    label: "Nhãn dán",
     align: "left",
     field: (row) => row.labels,
     sortable: true,
@@ -113,7 +113,7 @@ const columns = [
   {
     name: "created",
     required: true,
-    label: "Created",
+    label: "Ngày tạo",
     align: "left",
     field: (row) => row.created,
     sortable: true,

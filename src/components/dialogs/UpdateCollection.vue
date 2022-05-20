@@ -10,7 +10,7 @@
     v-close-popup
   >
     <q-card class="q-dialog-plugin q-pa-lg text-tertinary card" dark flat>
-      <div class="text-h6 text-accent">Update Collection</div>
+      <div class="text-h6 text-accent">Chỉnh sửa Collection</div>
       <q-form @submit.prevent="updateCollection" class="q-gutter-md">
         <div class="q-my-lg">
           <q-input
@@ -19,25 +19,25 @@
             type="text"
             dark
             color="accent"
-            label="Title"
+            label="Tiêu đề"
           />
         </div>
         <div class="q-mt-md">
-          <div class="text">Can read</div>
+          <div class="text">Đọc</div>
           <q-toggle v-model="collection.can_read" color="accent" size="xl" />
         </div>
         <div class="q-mt-md">
-          <div class="text">Can write</div>
+          <div class="text">Ghi</div>
           <q-toggle v-model="collection.can_write" color="accent" size="xl" />
         </div>
       </q-form>
       <q-card-actions align="right" class="card-action">
-        <q-btn flat color="secondary" label="Cancel" @click="onCancelClick" />
+        <q-btn flat color="secondary" label="Huỷ" @click="onCancelClick" />
         <q-btn
           flat
           color="accent"
           type="submit"
-          label="Update"
+          label="Cập nhật"
           @click="updateCollection"
           v-close-popup
         />

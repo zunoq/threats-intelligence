@@ -63,7 +63,7 @@
                   @click.stop="updateCollection(props.row)"
                   class="q-mr-md"
                 >
-                  <q-tooltip> Edit this Collection </q-tooltip>
+                  <q-tooltip> Chỉnh sửa Collection này </q-tooltip>
                 </q-btn>
                 <q-btn
                   flat
@@ -72,7 +72,7 @@
                   color="secondary"
                   @click.stop="deleteCollection(props.row)"
                 >
-                  <q-tooltip> Delete this Collection </q-tooltip>
+                  <q-tooltip> Xoá Collection này </q-tooltip>
                 </q-btn>
               </q-td>
             </q-tr>
@@ -111,7 +111,7 @@ const columns = [
   {
     name: "title",
     required: true,
-    label: "title",
+    label: "Tiêu đề",
     align: "left",
     field: (row) => row.title,
     sortable: true,
@@ -119,7 +119,7 @@ const columns = [
   {
     name: "can_read",
     required: true,
-    label: "Can Read",
+    label: "Đọc",
     align: "center",
     field: (row) => row.can_read,
     sortable: true,
@@ -127,7 +127,7 @@ const columns = [
   {
     name: "can_write",
     required: true,
-    label: "can write",
+    label: "Ghi",
     align: "center",
     field: (row) => row.can_write,
     sortable: true,

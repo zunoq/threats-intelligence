@@ -1,6 +1,8 @@
 <template>
   <div class="col-xs-12 col-md-12 col-lg-8">
-    <div class="text-caption text-uppercase text-grey-4">INGESTED ENTITIES</div>
+    <div class="text-caption text-uppercase text-grey-4">
+      số lượng thực thể đã khai thác
+    </div>
     <q-card dark flat bordered class="bg-primary light-font">
       <LineChart
         :chart-data="data"

@@ -10,11 +10,11 @@
     v-close-popup
   >
     <q-card class="q-dialog-plugin q-pa-lg text-tertinary card" dark flat>
-      <div class="text-h6 text-accent q-my-lg">Update</div>
+      <div class="text-h6 text-accent q-my-lg">Chỉnh sửa API Root</div>
       <q-form @submit.prevent="updateAPIRoot" class="q-gutter-md">
         <q-input
           v-model="apr.name"
-          label="Name"
+          label="Tên"
           type="text"
           dark
           color="accent"
@@ -26,7 +26,7 @@
           type="text"
           dark
           color="accent"
-          label="Title"
+          label="Tiêu đề"
         />
         <q-input
           v-model="apr.description"
@@ -34,23 +34,23 @@
           type="text"
           dark
           color="accent"
-          label="Description"
+          label="Mô tả"
         />
         <q-input
           v-model.number="apr.max_content_length"
           type="number"
           dark
           color="accent"
-          label="Max Content Length"
+          label="Dung lượng tối đa"
         />
       </q-form>
       <q-card-actions align="right" class="card-action">
-        <q-btn flat color="secondary" label="Cancel" @click="onCancelClick" />
+        <q-btn flat color="secondary" label="Huỷ" @click="onCancelClick" />
         <q-btn
           flat
           color="accent"
           type="submit"
-          label="Update"
+          label="Cập nhật"
           @click="updateAPIRoot"
           v-close-popup
         />

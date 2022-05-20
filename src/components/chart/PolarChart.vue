@@ -1,7 +1,7 @@
 <template>
   <div class="col-xs-12 col-md-12 col-lg-6">
     <div class="text-caption text-uppercase text-grey-4">
-      OBSERVABLES DISTRIBUTION
+      Số lượng các quan sát
     </div>
     <q-card dark flat bordered class="bg-primary light-font">
       <PolarAreaChart :chart-data="data" :options="options" />

@@ -1,7 +1,7 @@
 <template>
   <div class="col-md-12 col-lg-4">
     <div class="text-caption text-uppercase text-grey-4">
-      Top Label (last 3 months)
+      Top Nhãn dán (3 tháng gần nhất)
     </div>
     <q-card class="label-card" flat dark bordered>
       <div class="row">

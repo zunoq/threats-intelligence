@@ -1,7 +1,7 @@
 <template>
   <div class="col-12">
     <div class="text-caption text-uppercase text-grey-4">
-      LAST INGESTED ANALYSIS (CREATION DATE IN THE PLATFORM)
+      các phân tích được khai thác cuối cùng
     </div>
     <q-card dark flat bordered>
       <div class="">

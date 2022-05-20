@@ -10,24 +10,24 @@
     v-close-popup
   >
     <q-card class="q-dialog-plugin q-pa-lg text-tertinary card" dark flat>
-      <div class="text-h6 text-accent q-my-lg">Create new Object</div>
+      <div class="text-h6 text-accent q-my-lg">Tạo Object mới</div>
       <q-form @submit.prevent="sendObject" class="q-gutter-md">
         <q-input
           dark
           v-model="object.json"
           filled
           color="accent"
-          label="Paste Json here"
+          label="Paste JSON here"
           type="textarea"
         />
       </q-form>
       <q-card-actions align="right" class="card-action">
-        <q-btn flat color="secondary" label="Cancel" @click="onCancelClick" />
+        <q-btn flat color="secondary" label="Huỷ" @click="onCancelClick" />
         <q-btn
           flat
           color="accent"
           type="submit"
-          label="Create"
+          label="Tạo"
           @click="sendObject"
           v-close-popup
         />

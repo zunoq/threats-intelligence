@@ -26,10 +26,10 @@
                 <q-menu fit auto-close square flat>
                   <q-list class="bg-primary">
                     <q-item clickable dark @click.stop="updateAPIRoot">
-                      <q-item-section>Update</q-item-section>
+                      <q-item-section>Chỉnh sửa</q-item-section>
                     </q-item>
                     <q-item clickable dark @click.stop="deleteAPIRoot">
-                      <q-item-section>Remove</q-item-section>
+                      <q-item-section>Xoá</q-item-section>
                     </q-item>
                   </q-list>
                 </q-menu>
@@ -40,7 +40,9 @@
             {{ truncate(apiRoot.description, 150) }}
           </q-card-section>
           <q-card-section>
-            Max content length: {{ apiRoot.max_content_length }}
+            <div class="text-caption">
+              Dung lượng tối đa: {{ apiRoot.max_content_length }}
+            </div>
           </q-card-section>
         </div>
       </div>

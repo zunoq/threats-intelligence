@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <div class="text-caption text-uppercase text-grey-4">basic information</div>
+    <div class="text-caption text-uppercase text-grey-4">thông tin cơ bản</div>
     <q-card class="row my-card bg-primary q-my-sm" dark flat>
       <q-card-section class="col-12">
         <div class="text-caption q-mb-sm text-secondary">
@@ -18,7 +18,7 @@
       </q-card-section>
       <q-card-section class="col-12">
         <div class="text-caption q-mb-sm text-secondary">
-          Name
+          tên
           <q-icon name="info" color="secondary" size="20px">
             <q-tooltip>
               In Threats Intelligence,a predictable ID is generated based on one
@@ -37,7 +37,7 @@
         </div>
       </q-card-section>
       <q-card-section class="col-6 pattern_type">
-        <div class="text-caption q-mb-sm text-secondary">Pattern type</div>
+        <div class="text-caption q-mb-sm text-secondary">Kiểu Pattern</div>
         <div class="label-container text-center text-uppercase">
           <div class="label-text text-light">
             {{ infor.pattern_type }}
@@ -45,26 +45,28 @@
         </div>
       </q-card-section>
       <q-card-section class="col-6">
-        <div class="text-caption q-mb-sm text-secondary">Type</div>
+        <div class="text-caption q-mb-sm text-secondary">Phân loại</div>
         <div class="text-uppercase">
           <q-chip square outline color="secondary" :label="infor.type" />
         </div>
       </q-card-section>
 
       <q-card-section class="col-6">
-        <div class="text-caption q-mb-sm text-secondary">Creation date</div>
+        <div class="text-caption q-mb-sm text-secondary">Ngày tạo</div>
         <div class="text-body2">{{ dateconvert(infor.created) }}</div>
       </q-card-section>
       <q-card-section class="col-6">
-        <div class="text-caption q-mb-sm text-secondary">Valid from</div>
+        <div class="text-caption q-mb-sm text-secondary">Có giá trị từ</div>
         <div class="text-body2">{{ dateconvert(infor.valid_from) }}</div>
       </q-card-section>
       <q-card-section class="col-6">
-        <div class="text-caption q-mb-sm text-secondary">Modified date</div>
+        <div class="text-caption q-mb-sm text-secondary">
+          Ngày chỉnh sửa cuối
+        </div>
         <div class="text-body2">{{ dateconvert(infor.modified) }}</div>
       </q-card-section>
       <q-card-section class="col-6">
-        <div class="text-caption q-mb-sm text-secondary">Labels</div>
+        <div class="text-caption q-mb-sm text-secondary">Nhãn dán</div>
         <div
           class="labels q-ma-xs"
           v-for="(label, idx) in infor.labels"

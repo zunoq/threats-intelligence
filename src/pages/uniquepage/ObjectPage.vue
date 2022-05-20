@@ -7,18 +7,6 @@
           {{ object.name }}
         </q-tooltip>
       </div>
-      <q-btn color="white" round flat icon="more_vert" class="q-mx-md">
-        <q-menu dark class="bg-quaternary">
-          <q-list>
-            <q-item clickable>
-              <q-item-section>Update</q-item-section>
-            </q-item>
-            <q-item clickable>
-              <q-item-section>Delete</q-item-section>
-            </q-item>
-          </q-list>
-        </q-menu>
-      </q-btn>
     </div>
     <div class="row q-col-gutter-md">
       <div class="col-6">
