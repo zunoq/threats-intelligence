@@ -27,7 +27,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { useQuasar, Notify } from "quasar";
-import ApiRootCard from "../components/data/APIRootCard.vue";
+import ApiRootCard from "src/components/data/ApiRootCard.vue";
 import AddAPIRoot from "../components/dialogs/AddAPIRoot.vue";
 import restService from "../services/rest.service.js";
 import formService from "../services/form.service";

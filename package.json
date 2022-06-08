@@ -18,11 +18,11 @@
     "@vue/cli": "^5.0.4",
     "axios": "^0.27.2",
     "chart.js": "^3.7.1",
-    "chartjs-plugin-gradient": "^0.5.0",
     "core-js": "^3.6.5",
     "global": "^4.4.0",
     "quasar": "^2.6.0",
     "querystring": "^0.2.1",
+    "v-network-graph": "^0.5.17",
     "vue": "^3.0.0",
     "vue-chart-3": "^3.1.8",
     "vue-router": "^4.0.0"
