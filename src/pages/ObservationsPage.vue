@@ -13,10 +13,7 @@
             <circle cx="0.5" cy="0.5" r="0.5" />
           </clipPath>
         </defs>
-
-        <!-- Replace the node component -->
         <template #override-node="{ nodeId, scale, config, ...slotProps }">
-          <!-- circle for filling background -->
           <circle
             class="face-circle"
             :r="config.radius * scale"
@@ -67,7 +64,43 @@ export default defineComponent({
   name: "ObservationsPage",
   data() {
     return {
-      obs: ref({}),
+      obs: {
+        nodes: {
+          node1: {
+            id: 1,
+            name: "Attack Pattern",
+            face: "https://oasis-open.github.io/cti-documentation/img/icons/attack_pattern.png",
+          },
+          node2: {
+            id: 2,
+            name: "Campaign",
+            face: "https://oasis-open.github.io/cti-documentation/img/icons/campaign.png",
+          },
+          node3: {
+            id: 3,
+            name: "Course of Action",
+            face: "https://oasis-open.github.io/cti-documentation/img/icons/course_of_action.png",
+          },
+          node4: {
+            id: 4,
+            name: "Grouping",
+            face: "https://oasis-open.github.io/cti-documentation/img/icons/grouping.png",
+          },
+        },
+        edges: {
+          edge1: { source: "node1", target: "node3" },
+          edge2: { source: "node2", target: "node3" },
+          edge3: { source: "node3", target: "node4" },
+        },
+        position: {
+          nodes: {
+            node1: { x: 100, y: 1000 },
+            node2: { x: 50, y: 50 },
+            node3: { x: 0, y: 0 },
+            node4: { x: 150, y: 0 },
+          },
+        },
+      },
       configs: vNG.defineConfigs({
         view: {
           panEnabled: true,
@@ -203,14 +236,15 @@ export default defineComponent({
   },
   emits: ["e"],
   methods: {
-    async addObs() {
+    addObs() {
       this.$q
         .dialog({
           component: AddObject,
           componentProps: {},
         })
         .onOk((e) => {
-          this.$q.localStorage.set("obs", e).then(this.getObs());
+          this.$q.localStorage.set("obs", e);
+          this.getObs();
         })
         .onCancel(() => {})
         .onDismiss(() => {});
@@ -218,10 +252,12 @@ export default defineComponent({
     getObs() {
       const t = this.$q.localStorage.getItem("obs");
       this.obs = t;
+      console.log(this.obs);
     },
   },
-  created() {
-    this.getObs();
+  beforeCreate() {
+    const t = this.$q.localStorage.getItem("obs");
+    this.obs = t;
     console.log(this.obs);
   },
 });

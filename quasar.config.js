@@ -16,7 +16,7 @@ const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
   const axios = require('axios').create({
-    baseURL: 'http://192.168.1.4:8080/',
+    baseURL: 'http://192.168.1.6:8080/',
     responseType: 'json',
     withCredentials: true
   })
@@ -62,7 +62,7 @@ module.exports = configure(function (ctx) {
       // publicPath: '/',
 
       env: {
-        API: "http://192.168.1.4:8080/"
+        API: "http://192.168.1.6:8080/"
       },
       // Add dependencies for transpiling with Babel (Array of string/regex)
       // (from node_modules, which are by default not transpiled).
