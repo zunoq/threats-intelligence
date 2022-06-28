@@ -37,7 +37,13 @@
           <q-btn flat round color="primary" icon="dashboard_customize">
             <q-tooltip> Tuỳ chỉnh Dashboard </q-tooltip>
           </q-btn>
-          <q-btn flat round color="primary" icon="explore">
+          <q-btn
+            flat
+            round
+            color="primary"
+            icon="explore"
+            href="http://127.0.0.1:5500/index.html"
+          >
             <q-tooltip> Điều tra </q-tooltip></q-btn
           >
           <q-btn flat round color="primary" icon="upload">
