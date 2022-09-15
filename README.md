@@ -1,4 +1,4 @@
-# Quasar App (ti-project)
+# Threat Intelligence (ti-frontend)
 
 A Quasar Project
 
